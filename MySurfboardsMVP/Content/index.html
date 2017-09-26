@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .showCurser {
+            cursor: pointer;
+        }
+
+        .whiteSpace {
+            height: 45px;
+        }
+
+        .widthSpace {
+            width: 20px;
+        }
+
+
+        /***********************/
+
+
+        <style > body {
+            background-color: white;
+        }
+
+        .navbar {
+            background-color: deepskyblue;
+        }
+
+        .titleText {
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+            font-family: Calibri;
+        }
+
+        .linkText {
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            font-family: Calibri;
+        }
+
+        .searchBox {
+            background-color: lightgreen;
+        }
+
+        .qAndABox {
+            /*background-color: white;*/
+            height: 95px;
+        }
+
+
+        
+    </style>
+
+    </style>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+    <script src="index.js"></script>
+
+    <!--navbar-->
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand titleText" href="http://localhost:58300/Angular/index.html">SurfEngine.io</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right collapse navbar-collapse">
+                    <li><a class="linkText" href="/Content/index.html">Index</a></li>
+                    <li><a class="linkText" href="/Content/Create.html">Create</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div ng-app="MainApp">
+        <div ng-controller="MainController as vm">
+
+            <!--<pre>{{vm|json}}</pre>-->
+
+            <!--searchbox-->
+
+            <div class="whiteSpace"></div>
+
+            <div class="form-group col-md-offset-2 col-md-8 well searchBox">
+                <input type="text" class="form-control input-lg" placeholder="Search: question/answer"
+                       ng-model="vm.searchText" ng-change="vm.myFilter()" />  <!--we do not use angulars standard filter, but instead, angulars filter along with javascripts filter. Angulars default filter filters on all categories rather than a specific category like name or question.-->
+            </div><br /><br /><br /><br /><br /><br />
+
+
+            <!--list items-->
+
+
+            <div>
+                <div class="card-header action-header clearfix bgm-blue">
+                </div>
+                <div class=" col-md-offset-2 col-md-8 well" style="background-color: #f2f2f2; border-top:1px solid lightgray; font-size: 10px" ng-repeat="item in vm.items">
+
+                    <div class="col-md-4">
+                        <img ui-sref="companiesManage({id: item.id})" ng-src="{{}}" class="img-thumbnail showCurser" alt="noImg" width="80" height="80">
+                    </div>
+                    <div class="col-md-6">
+                        <div ui-sref="companiesManage({id: item.id})" class="lgi-heading showCurser"><h4>{{item.brand}} - {{item.name}}</h4></div>
+                        <ul class="lgi-attrs">
+                            <br />
+                            <li class="showCurser">Height: <span>{{item.height}}</span></li>
+                            <br />
+                            <li class="showCurser">Width: <span>{{item.width}} </a></span></li>
+                            <br />
+                            <li class="showCurser">Volume: <span>{{item.volume}}L</span></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-2" ui-sref="companiesmanage({id: item.id})">
+                        <div class="whiteSpace"></div>
+                        <div class="col-md-offset-6">
+                            <button ng-click="vm.editItemBtnClick(item)" class="btn btn-default"> Edit </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
