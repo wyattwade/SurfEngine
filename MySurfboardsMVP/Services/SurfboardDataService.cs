@@ -48,17 +48,42 @@ namespace MySurfboardsMVP.Services
 
                         if (reader["Height"] != DBNull.Value)
                         {
-                            mySurfBoard.Height = (decimal)reader["Height"];
+                            mySurfBoard.Height = (int)reader["Height"];
                         }
 
                         if (reader["Width"] != DBNull.Value)
                         {
-                            mySurfBoard.Width = (decimal)reader["Width"];
+                            mySurfBoard.Width = (int)reader["Width"];
                         }
 
                         if (reader["Volume"] != DBNull.Value)
                         {
-                            mySurfBoard.Volume = (decimal)reader["Volume"];
+                            mySurfBoard.Volume = (int)reader["Volume"];
+                        }
+
+                        if (reader["Image"] != DBNull.Value)
+                        {
+                            mySurfBoard.Image = (string)reader["Image"];
+                        }
+                        else
+                        {
+                            mySurfBoard.Image = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
+                        }
+
+
+                        if (reader["Link"] != DBNull.Value)
+                        {
+                            mySurfBoard.Link = (string)reader["Link"];
+                        }
+
+                        if (reader["Price"] != DBNull.Value)
+                        {
+                            mySurfBoard.Price = (int)reader["Price"];
+                        }
+
+                        if (reader["FromInternalUser"] != DBNull.Value)
+                        {
+                            mySurfBoard.FromInternalUser = (bool)reader["FromInternalUser"];
                         }
 
 
@@ -108,17 +133,22 @@ namespace MySurfboardsMVP.Services
 
                         if (reader["Height"] != DBNull.Value)
                         {
-                            mySurfBoard.Height = (decimal)reader["Height"];
+                            mySurfBoard.Height = (int)reader["Height"];
                         }
 
                         if (reader["Width"] != DBNull.Value)
                         {
-                            mySurfBoard.Width = (decimal)reader["Width"];
+                            mySurfBoard.Width = (int)reader["Width"];
                         }
 
                         if (reader["Volume"] != DBNull.Value)
                         {
-                            mySurfBoard.Volume = (decimal)reader["Volume"];
+                            mySurfBoard.Volume = (int)reader["Volume"];
+                        }
+
+                        if (reader["FromInternalUser"] != DBNull.Value)
+                        {
+                            mySurfBoard.FromInternalUser = (bool)reader["FromInternalUser"];
                         }
                     }
 
@@ -207,5 +237,99 @@ namespace MySurfboardsMVP.Services
 
 
         }
+
+
+
+
+        public List<Surfboard> Search(BoardSearchParams bsp)
+        {
+
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfboardDBConnection"].ConnectionString))
+            {
+                con.Open();
+
+                var cmd = con.CreateCommand();
+                cmd.CommandText = "Surfboard_Search";
+                cmd.Parameters.AddWithValue("@Brand", bsp.Brand);
+                cmd.Parameters.AddWithValue("@Name", bsp.Name);
+                cmd.Parameters.AddWithValue("@Location", bsp.Location);
+                cmd.Parameters.AddWithValue("@MinHeight", bsp.MinHeight);
+                cmd.Parameters.AddWithValue("@MaxHeight", bsp.MaxHeight);
+                cmd.Parameters.AddWithValue("@MinWidth", bsp.MinWidth);
+                cmd.Parameters.AddWithValue("@MaxWidth", bsp.MaxWidth);
+                cmd.Parameters.AddWithValue("@MinVolume", bsp.MinVolume);
+                cmd.Parameters.AddWithValue("@MaxVolume", bsp.MaxVolume);
+                cmd.Parameters.AddWithValue("@MinPrice", bsp.MinPrice);
+                cmd.Parameters.AddWithValue("@MaxPrice", bsp.MaxPrice);
+                cmd.Parameters.AddWithValue("@CurrentPage", bsp.CurrentPage);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    var mySurfBoards = new List<Surfboard>();
+                    while (reader.Read())
+                    {
+                        var surfboard = new Surfboard();
+
+
+                        if (reader["Brand"] != DBNull.Value)
+                        {
+                            surfboard.Brand = (string)reader["Brand"];
+                        }
+
+                        if (reader["Name"] != DBNull.Value)
+                        {
+                            surfboard.Name = (string)reader["Name"];
+                        }
+
+                        if (reader["Height"] != DBNull.Value)
+                        {
+                            surfboard.Height = (int)reader["Height"];
+                        }
+
+                        if (reader["Width"] != DBNull.Value)
+                        {
+                            surfboard.Width = (int)reader["Width"];
+                        }
+
+                        if (reader["Volume"] != DBNull.Value)
+                        {
+                            surfboard.Volume = (int)reader["Volume"];
+                        }
+
+                        if (reader["Price"] != DBNull.Value)
+                        {
+                            surfboard.Price = (int)reader["Price"];
+                        }
+
+                        if (reader["Image"] != DBNull.Value)
+                        {
+                            surfboard.Image = (string)reader["Image"];
+                        }
+
+                        if (reader["Link"] != DBNull.Value)
+                        {
+                            surfboard.Link = (string)reader["Link"];
+                        }
+
+                        if (reader["TotalRows"] != DBNull.Value)
+                        {
+                            surfboard.TotalRows = (int)reader["TotalRows"];
+                        }
+
+                        if (reader["FromInternalUser"] != DBNull.Value)
+                        {
+                            surfboard.FromInternalUser = (bool)reader["FromInternalUser"];
+                        }
+                        mySurfBoards.Add(surfboard);
+                    }
+
+                    return mySurfBoards;
+                }
+            }
+        }
+
+
+
     }
 }

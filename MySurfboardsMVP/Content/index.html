@@ -3,6 +3,8 @@
 <head>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
     <style>
         .showCurser {
             cursor: pointer;
@@ -51,9 +53,28 @@
             height: 95px;
         }
 
+        .criteriaTable {
+            height: 1000px;
+            font-weight: bold;
+            font-size: 18px;
+        }
 
-        
-    </style>
+        .resultsTable {
+            height: 150px;
+        }
+
+        .myDropdown {
+            margin-bottom: 45px;
+            font-size: 14px;
+        }
+
+        .mySelect {
+            margin-top: 5px;
+        }
+
+        img {
+            width: 100%;
+        }
 
     </style>
     <meta charset="utf-8" />
@@ -62,11 +83,19 @@
 <body>
 
 
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
     <script src="index.js"></script>
 
+    <!--banner-->
+    <!--<div class="container" id="banner">
+        <div class="row">
+            <h1> Your banner </h1>
+        </div>
+    </div>-->
     <!--navbar-->
 
     <nav class="navbar">
@@ -87,49 +116,319 @@
     <div ng-app="MainApp">
         <div ng-controller="MainController as vm">
 
-            <!--<pre>{{vm|json}}</pre>-->
-
+            <!--<pre>{{vm.criteria|json}}</pre>-->
             <!--searchbox-->
 
             <div class="whiteSpace"></div>
 
-            <div class="form-group col-md-offset-2 col-md-8 well searchBox">
+            <!--<div class="form-group col-md-offset-2 col-md-8 well searchBox">
                 <input type="text" class="form-control input-lg" placeholder="Search: question/answer"
-                       ng-model="vm.searchText" ng-change="vm.myFilter()" />  <!--we do not use angulars standard filter, but instead, angulars filter along with javascripts filter. Angulars default filter filters on all categories rather than a specific category like name or question.-->
-            </div><br /><br /><br /><br /><br /><br />
+                       ng-model="vm.searchText" ng-change="vm.myFilter()" />  we do not use angulars standard filter, but instead, angulars filter along with javascripts filter. Angulars default filter filters on all categories rather than a specific category like name or question.
+            </div>-->
+            <!--Criteria-->
 
 
-            <!--list items-->
 
 
-            <div>
-                <div class="card-header action-header clearfix bgm-blue">
-                </div>
-                <div class=" col-md-offset-2 col-md-8 well" style="background-color: #f2f2f2; border-top:1px solid lightgray; font-size: 10px" ng-repeat="item in vm.items">
 
-                    <div class="col-md-4">
-                        <img ui-sref="companiesManage({id: item.id})" ng-src="{{}}" class="img-thumbnail showCurser" alt="noImg" width="80" height="80">
+            <div class="col-md-offset-1 col-md-2 criteriaTable">
+                <div class=" panel panel-default">
+                    <div class="panel-heading" style="height:70px">
+                        <div class="panel-title" style="font-weight:bold; font-size: 18px; color:gray; margin-top: 10px">Modify Results</div>
                     </div>
-                    <div class="col-md-6">
-                        <div ui-sref="companiesManage({id: item.id})" class="lgi-heading showCurser"><h4>{{item.brand}} - {{item.name}}</h4></div>
-                        <ul class="lgi-attrs">
-                            <br />
-                            <li class="showCurser">Height: <span>{{item.height}}</span></li>
-                            <br />
-                            <li class="showCurser">Width: <span>{{item.width}} </a></span></li>
-                            <br />
-                            <li class="showCurser">Volume: <span>{{item.volume}}L</span></li>
+                    <div class="panel-body">
+                        <div class=" myDropdown col-md-12">
+                            Location
+                            <select class='form-control  btn-default mySelect' id='location-drop-down' ng-model="vm.criteria.location" ng-change="vm.boardSearch()">
+                                <option value="">Any</option>
+                                <option value="losangeles">Los Angeles</option>
+                                <option value="sandiego">San Diego</option>
+                                <option value="sfbay">Bay Area</option>
+                                <option value="orangecounty">Orange County</option>
+                            </select>
+                        </div><br />
+                        <div class="myDropdown  col-md-12">
+                            Brand
+                            <select class='form-control  btn-default mySelect' id='make-drop-down' ng-model="vm.criteria.brand" ng-change="vm.boardSearch()">
+                                <option value="">Any</option>
+                                <option value="channel islands">Channel Islands</option>
+                                <option value="al merrick">Al Merrick (Channel Islands)</option>
+                                <option value="lost">Lost</option>
+                                <option value="rusty">Rusty</option>
+                                <option value="firewire">Firewire</option>
+                                <option value="hayden shapes">Hayden Shapes</option>
+                                <option value="patterson">TPatterson</option>
+                                <option value="js">JS</option>
+                                <option value="anderson">Anderson</option>
+                            </select>
+                        </div><br />
 
-                        </ul>
-                    </div>
-                    <div class="col-md-2" ui-sref="companiesmanage({id: item.id})">
-                        <div class="whiteSpace"></div>
-                        <div class="col-md-offset-6">
-                            <button ng-click="vm.editItemBtnClick(item)" class="btn btn-default"> Edit </button>
+                        <div class="myDropdown col-md-12">
+                            Minimum Height
+                            <select class='form-control  btn-default mySelect' id='min-height-drop-down' ng-model="vm.criteria.minHeight" ng-change="vm.boardSearch()">
+                                <option value=48>4'0</option>
+                                <option value=49>4'1</option>
+                                <option value=50>4'2</option>
+                                <option value=51>4'3</option>
+                                <option value=52>4'4</option>
+                                <option value=53>4'5</option>
+                                <option value=54>4'6</option>
+                                <option value=55>4'7</option>
+                                <option value=56>4'8</option>
+                                <option value=57>4'9</option>
+                                <option value=58>4'10</option>
+                                <option value=59>4'11</option>
+                                <option value=60>5'0</option>
+                                <option value=61>5'1</option>
+                                <option value=62>5'2</option>
+                                <option value=63>5'3</option>
+                                <option value=64>5'4</option>
+                                <option value=65>5'5</option>
+                                <option value=66>5'6</option>
+                                <option value=67>5'7</option>
+                                <option value=68>5'8</option>
+                                <option value=69>5'9</option>
+                                <option value=70>5'10</option>
+                                <option value=71>5'11</option>
+                                <option value=72>6'0</option>
+                                <option value=73>6'1</option>
+                                <option value=74>6'2</option>
+                                <option value=75>6'3</option>
+                                <option value=76>6'4</option>
+                                <option value=77>6'5</option>
+                                <option value=78>6'6</option>
+                                <option value=79>6'7</option>
+                                <option value=80>6'8</option>
+                                <option value=81>6'9</option>
+                                <option value=82>6'10</option>
+                                <option value=83>6'11</option>
+                                <option value=84>7'0</option>
+                                <option value=85>7'1</option>
+                                <option value=86>7'2</option>
+                                <option value=87>7'3</option>
+                                <option value=88>7'4</option>
+                                <option value=89>7'5</option>
+                                <option value=90>7'6</option>
+                                <option value=91>7'7</option>
+                                <option value=92>7'8</option>
+                                <option value=93>7'9</option>
+                                <option value=94>7'10</option>
+                                <option value=95>7'11</option>
+                                <option value=96>8'0</option>
+                                <option value=97>8'1</option>
+                                <option value=98>8'2</option>
+                                <option value=99>8'3</option>
+                                <option value=100>8'4</option>
+                                <option value=101>8'5</option>
+                                <option value=102>8'6</option>
+                                <option value=103>8'7</option>
+                                <option value=104>8'8</option>
+                                <option value=105>8'9</option>
+                                <option value=106>8'10</option>
+                                <option value=107>8'11</option>
+                                <option value=108>9'0</option>
+                                <option value=109>9'1</option>
+                                <option value=110>9'2</option>
+                                <option value=111>9'3</option>
+                                <option value=112>9'4</option>
+                                <option value=113>9'5</option>
+                                <option value=114>9'6</option>
+                                <option value=115>9'7</option>
+                                <option value=116>9'8</option>
+                                <option value=117>9'9</option>
+                                <option value=118>9'10</option>
+                                <option value=119>9'11</option>
+                                <option value=120>10'0</option>
+                            </select>
+                        </div><br />
+
+                        <div class="myDropdown col-md-12">
+                            Maximum Height
+                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxHeight" ng-change="vm.boardSearch()">
+                                <option value=48>4'0</option>
+                                <option value=49>4'1</option>
+                                <option value=50>4'2</option>
+                                <option value=51>4'3</option>
+                                <option value=52>4'4</option>
+                                <option value=53>4'5</option>
+                                <option value=54>4'6</option>
+                                <option value=55>4'7</option>
+                                <option value=56>4'8</option>
+                                <option value=57>4'9</option>
+                                <option value=58>4'10</option>
+                                <option value=59>4'11</option>
+                                <option value=60>5'0</option>
+                                <option value=61>5'1</option>
+                                <option value=62>5'2</option>
+                                <option value=63>5'3</option>
+                                <option value=64>5'4</option>
+                                <option value=65>5'5</option>
+                                <option value=66>5'6</option>
+                                <option value=67>5'7</option>
+                                <option value=68>5'8</option>
+                                <option value=69>5'9</option>
+                                <option value=70>5'10</option>
+                                <option value=71>5'11</option>
+                                <option value=72>6'0</option>
+                                <option value=73>6'1</option>
+                                <option value=74>6'2</option>
+                                <option value=75>6'3</option>
+                                <option value=76>6'4</option>
+                                <option value=77>6'5</option>
+                                <option value=78>6'6</option>
+                                <option value=79>6'7</option>
+                                <option value=80>6'8</option>
+                                <option value=81>6'9</option>
+                                <option value=82>6'10</option>
+                                <option value=83>6'11</option>
+                                <option value=84>7'0</option>
+                                <option value=85>7'1</option>
+                                <option value=86>7'2</option>
+                                <option value=87>7'3</option>
+                                <option value=88>7'4</option>
+                                <option value=89>7'5</option>
+                                <option value=90>7'6</option>
+                                <option value=91>7'7</option>
+                                <option value=92>7'8</option>
+                                <option value=93>7'9</option>
+                                <option value=94>7'10</option>
+                                <option value=95>7'11</option>
+                                <option value=96>8'0</option>
+                                <option value=97>8'1</option>
+                                <option value=98>8'2</option>
+                                <option value=99>8'3</option>
+                                <option value=100>8'4</option>
+                                <option value=101>8'5</option>
+                                <option value=102>8'6</option>
+                                <option value=103>8'7</option>
+                                <option value=104>8'8</option>
+                                <option value=105>8'9</option>
+                                <option value=106>8'10</option>
+                                <option value=107>8'11</option>
+                                <option value=108>9'0</option>
+                                <option value=109>9'1</option>
+                                <option value=110>9'2</option>
+                                <option value=111>9'3</option>
+                                <option value=112>9'4</option>
+                                <option value=113>9'5</option>
+                                <option value=114>9'6</option>
+                                <option value=115>9'7</option>
+                                <option value=116>9'8</option>
+                                <option value=117>9'9</option>
+                                <option value=118>9'10</option>
+                                <option value=119>9'11</option>
+                                <option value=120>10'0</option>
+                            </select>
                         </div>
+
+                        <div class="myDropdown col-md-12">
+                            Minimum Price
+                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.minPrice" ng-change="vm.boardSearch()">
+                                <option value=0>$0</option>
+                                <option value=20>$20</option>
+                                <option value=40>$40</option>
+                                <option value=60>$60</option>
+                                <option value=80>$80</option>
+                                <option value=100>$100</option>
+                                <option value=120>$120</option>
+                                <option value=140>$140</option>
+                                <option value=160>$160</option>
+                                <option value=180>$180</option>
+                                <option value=200>$200</option>
+                                <option value=220>$220</option>
+                                <option value=240>$240</option>
+                                <option value=260>$260</option>
+                                <option value=280>$280</option>
+                                <option value=300>$300</option>
+                                <option value=350>$350</option>
+                                <option value=400>$400</option>
+                                <option value=450>$450</option>
+                                <option value=500>$500</option>
+                                <option value=550>$550</option>
+                                <option value=600>$600</option>
+                                <option value=650>$650</option>
+                                <option value=700>$700</option>
+                                <option value=750>$750</option>
+                                <option value=800>$800</option>
+                            </select>
+                        </div>
+
+
+                        <div class="myDropdown col-md-12">
+                            Maximum Price
+                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxPrice" ng-change="vm.boardSearch()">
+                                <option value="">any</option>
+                                <option value=0>$0</option>
+                                <option value=20>$20</option>
+                                <option value=40>$40</option>
+                                <option value=60>$60</option>
+                                <option value=80>$80</option>
+                                <option value=100>$100</option>
+                                <option value=120>$120</option>
+                                <option value=140>$140</option>s
+                                <option value=160>$160</option>
+                                <option value=180>$180</option>
+                                <option value=200>$200</option>
+                                <option value=220>$220</option>
+                                <option value=240>$240</option>
+                                <option value=260>$260</option>
+                                <option value=280>$280</option>
+                                <option value=300>$300</option>
+                                <option value=350>$350</option>
+                                <option value=400>$400</option>
+                                <option value=450>$450</option>
+                                <option value=500>$500</option>
+                                <option value=550>$550</option>
+                                <option value=600>$600</option>
+                                <option value=650>$650</option>
+                                <option value=700>$700</option>
+                                <option value=750>$750</option>
+                                <option value=800>$800</option>
+                                <option value=900>$900</option>
+                                <option value=1000>$1000</option>
+                                <option value=1100>$1100</option>
+                                <option value=1200>$1200</option>
+                                <option value=1300>$1300</option>
+                                <option value=1400>$1400</option>
+                                <option value=1500>$1500</option>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
+
+                <!--List Items-->
+
+
+                <div class="col-md-7 well">
+                    <div class="col-md-12 resultsTable" style="background-color:; border-top:1px solid lightgray; font-size: 10px" ng-repeat="item in vm.items">
+                        <div style="height:10px;"></div> <!--whitespace-->
+                        <div class="col-md-2">
+                            <div style="height:5px;"></div> <!--whitespace-->
+                            <img  ng-src="{{item.image}}" class="" alt="" height="120" width="120">
+                        </div>
+                        <div class="col-md-8">
+                            <div ng-show="!item.fromInternalUser" ng-click="vm.editItemBtnClick(item)" class="lgi-heading showCurser"><h5>{{item.brand}} - {{item.name}}</h5></div> <!--from craigslist-->
+                            <ul class="lgi-attrs">
+                                <br />
+                                <li class="showCurser">Height: <span>{{item.height}}</span></li>
+                                <br />
+                                <li class="showCurser">Width: <span>{{item.width}} </a></span></li>
+                                <br />
+                                <li class="showCurser">Price: <span>${{item.price}}</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="whiteSpace"></div>
+                            <div class="col-md-offset-6">
+                                <button ng-show="!item.fromInternalUser" ng-click="vm.editItemBtnClick(item)" class="btn btn-default"> View </button>  <!--from craigslist-->
+                                <button ng-show="item.fromInternalUser" ng-click="vm.editItemBtnClick(item)" class="btn btn-default"> Edit </button>  <!--internal-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 
