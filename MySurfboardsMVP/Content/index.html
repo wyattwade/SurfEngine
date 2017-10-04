@@ -76,6 +76,10 @@
             width: 100%;
         }
 
+        li {
+            font-size: 12px;
+        }
+
     </style>
     <meta charset="utf-8" />
     <title></title>
@@ -166,6 +170,7 @@
                         <div class="myDropdown col-md-12">
                             Minimum Height
                             <select class='form-control  btn-default mySelect' id='min-height-drop-down' ng-model="vm.criteria.minHeight" ng-change="vm.boardSearch()">
+                                <option value="">Any</option>
                                 <option value=48>4'0</option>
                                 <option value=49>4'1</option>
                                 <option value=50>4'2</option>
@@ -245,6 +250,7 @@
                         <div class="myDropdown col-md-12">
                             Maximum Height
                             <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxHeight" ng-change="vm.boardSearch()">
+                                <option value="">Any</option>
                                 <option value=48>4'0</option>
                                 <option value=49>4'1</option>
                                 <option value=50>4'2</option>
@@ -324,6 +330,7 @@
                         <div class="myDropdown col-md-12">
                             Minimum Price
                             <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.minPrice" ng-change="vm.boardSearch()">
+                                <option value="">Any</option>
                                 <option value=0>$0</option>
                                 <option value=20>$20</option>
                                 <option value=40>$40</option>
@@ -357,7 +364,7 @@
                         <div class="myDropdown col-md-12">
                             Maximum Price
                             <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxPrice" ng-change="vm.boardSearch()">
-                                <option value="">any</option>
+                                <option value="">Any</option>
                                 <option value=0>$0</option>
                                 <option value=20>$20</option>
                                 <option value=40>$40</option>
@@ -403,28 +410,28 @@
 
 
                 <div class="col-md-7 well">
-                    <div class="col-md-12 resultsTable" style="background-color:; border-top:1px solid lightgray; font-size: 10px" ng-repeat="item in vm.items">
+                    <div class="col-md-12 resultsTable" style="cursor:pointer; border-top:1px solid lightgray; font-size: 10px" ng-repeat="item in vm.items" ng-click="vm.editItemBtnClick(item)">
                         <div style="height:10px;"></div> <!--whitespace-->
                         <div class="col-md-2">
                             <div style="height:5px;"></div> <!--whitespace-->
                             <img  ng-src="{{item.image}}" class="" alt="" height="120" width="120">
                         </div>
                         <div class="col-md-8">
-                            <div ng-show="!item.fromInternalUser" ng-click="vm.editItemBtnClick(item)" class="lgi-heading showCurser"><h5>{{item.brand}} - {{item.name}}</h5></div> <!--from craigslist-->
+                            <div ng-show="!item.fromInternalUser" class="lgi-heading showCurser"><h5><!--{{item.brand}}-->  {{item.name}}</h5></div> <!--from craigslist-->
                             <ul class="lgi-attrs">
                                 <br />
-                                <li class="showCurser">Height: <span>{{item.height}}</span></li>
+                                <li class="showCurser">Height: <span>{{vm.displayHeight(item.height)}}</span></li>
                                 <br />
-                                <li class="showCurser">Width: <span>{{item.width}} </a></span></li>
-                                <br />
+                                <!--<li class="showCurser">Width: <span>{{item.width}} </a></span></li>
+                                <br />-->
                                 <li class="showCurser">Price: <span>${{item.price}}</span></li>
                             </ul>
                         </div>
                         <div class="col-md-2">
                             <div class="whiteSpace"></div>
                             <div class="col-md-offset-6">
-                                <button ng-show="!item.fromInternalUser" ng-click="vm.editItemBtnClick(item)" class="btn btn-default"> View </button>  <!--from craigslist-->
-                                <button ng-show="item.fromInternalUser" ng-click="vm.editItemBtnClick(item)" class="btn btn-default"> Edit </button>  <!--internal-->
+                                <button ng-show="!item.fromInternalUser" class="btn btn-default"> View </button>  <!--from craigslist-->
+                                <button ng-show="item.fromInternalUser" class="btn btn-default"> Edit </button>  <!--internal-->
                             </div>
                         </div>
                     </div>

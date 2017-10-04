@@ -14,7 +14,12 @@
         vm.boardSearch = _boardSearch;
         vm.$onInit = _boardSearch;
         vm.criteria = {};
+        vm.displayHeight = _displayHeight;
 
+
+        function _displayHeight(height) {
+            return Math.floor(height / 12) + "'" + (height % 12)
+        }
 
 
         function _boardSearch() {

@@ -77,31 +77,6 @@ namespace MySurfboardsMVP.Controllers
 
 
 
-
-
-
-
-
-
-        //[HttpGet]
-        //[Route("~/api/actionitemfilter")]
-        //public HttpResponseMessage SearchItems([FromUri]ActionItemSearchRequest model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-        //    }
-        //    ItemsResponse<ActionItem> response = new ItemsResponse<ActionItem>();
-        //    response.Items = _svc.SearchItems(model);
-        //    return Request.CreateResponse(HttpStatusCode.OK, response);
-        //}
-
-
-
-
-
-
-
         // api/surfboards/{id}
         [HttpGet]
         [Route("Search")]
