@@ -249,7 +249,7 @@ namespace MySurfboardsMVP.Services
                 con.Open();
 
                 var cmd = con.CreateCommand();
-                cmd.CommandText = "Surfboard_Search";
+                cmd.CommandText = "dbo.Surfboard_Search";
                 cmd.Parameters.AddWithValue("@Brand", bsp.Brand);
                 cmd.Parameters.AddWithValue("@Name", bsp.Name);
                 cmd.Parameters.AddWithValue("@Location", bsp.Location);

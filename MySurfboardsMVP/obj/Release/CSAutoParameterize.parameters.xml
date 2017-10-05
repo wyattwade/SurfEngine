@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="SurfboardDBConnection-Web.config Connection String" description="SurfboardDBConnection Connection String used in web.config by the application to access the database." defaultValue="Server=tcp:mysurfboardsmvp20171004093402dbserver.database.windows.net,1433; Initial Catalog=MySurfboardsMVP20171004093402_db; Persist Security Info=False; User ID=wyattelliott; Password=Mango123; MultipleActiveResultSets=False; Encrypt=True; TrustServerCertificate=False; Connection Timeout=30;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\SF\.Code\\MySurfboardsMVP\\MySurfboardsMVP\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SurfboardDBConnection']/@connectionString" />
+  </parameter>
+</parameters>

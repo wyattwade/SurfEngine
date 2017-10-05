@@ -88,3 +88,5 @@ C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Antlr3.Runtime.pdb
 C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\obj\Debug\MySurfboardsMVP.csprojResolveAssemblyReference.cache
 C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\obj\Debug\MySurfboardsMVP.dll
 C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\obj\Debug\MySurfboardsMVP.pdb
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Microsoft.WindowsAzure.Configuration.dll
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Microsoft.WindowsAzure.Configuration.xml

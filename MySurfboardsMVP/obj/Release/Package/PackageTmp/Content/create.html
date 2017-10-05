@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: white;
+        }
+
+        .navbar {
+            background-color: deepskyblue;
+        }
+
+        .titleText {
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+            font-family: Calibri;
+        }
+
+        .linkText {
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            font-family: Calibri;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+    <script src="create.js"></script>
+
+    <!--navbar-->
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand titleText" href="/content/index.html">SurfEngine.io</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right collapse navbar-collapse">
+                    <li><a class="linkText" href="/Content/index.html">Index</a></li>
+                    <li><a class="linkText" href="/Content/Create.html">Create</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div ng-app="MainApp">
+        <div ng-controller="PostController as vm" class="row col-md-offset-3 col-md-6 well">
+
+            <!--<pre>{{vm.item|json}}</pre>-->
+
+                    <form name="vm.registrationForm" class="col-md-12" novalidate>
+                        <div class="form-group col-md-6" ng-class="{'has-error' :  vm.showValidationError('brand')}">
+                            <input name="brand" type="text" class="form-control" ng-model="vm.item.brand" required placeholder="Brand" />
+                            <span ng-show="(vm.showValidationError('brand'))" class="help-block">Please enter the brand</span>
+                        </div>
+                        <div class="form-group col-md-6" ng-class="{'has-error' : vm.showValidationError('name')}">
+                            <input name="name" type="text" class="form-control" ng-model="vm.item.name" required placeholder="Model Name" />
+                            <p ng-show="vm.showValidationError('name')" class="help-block">Please enter the model name</p>
+                        </div>
+                        <div class="form-group col-md-12" ng-class="{'has-error' : vm.showValidationError('height')}">
+                            <input type="text" name="height" class="form-control" ng-model="vm.item.height" required placeholder="Height"/>
+                            <p ng-show="vm.showValidationError('height')" class="help-block">Height</p>
+                        </div>
+                        <div class="form-group col-md-12" ng-class="{'has-error' : vm.showValidationError('width')}">
+                            <input type="text" name="width" class="form-control" ng-model="vm.item.width" required placeholder="Width" />
+                            <p ng-show="vm.showValidationError('width')" class="help-block">Please enter the width</p>
+                        </div>
+                        <div class="form-group col-md-12" ng-class="{'has-error' : vm.showValidationError('volume')}">
+                            <input type="text" name="volume" class="form-control" ng-model="vm.item.volume" required placeholder="Volume" />
+                            <p ng-show="vm.showValidationError('volume')" class="help-block">Please enter the volume</p>
+                        </div>
+                        <div class="col-md-12" ng-show="vm.showEdit == false">
+                            <button type="submit" class="btn btn-primary col-md-3 saveBtn" ng-click="vm.save(vm.registrationForm)">Save</button>   <!-- mouseover will not work with my save button if ng-disabled="registrationForm.$invalid" is in effect. I have a trade off of whether I want mouseover or disabled save to work. -->
+                        </div>
+                        <div class="col-md-12" ng-show="vm.showEdit == true">
+                            <button type="submit" class="btn btn-danger col-md-4 editBtn" ng-click="vm.delete(vm.registrationForm)" >Delete</button>   <!-- mouseover will not work with my save button if ng-disabled="registrationForm.$invalid" is in effect. I have a trade off of whether I want mouseover or disabled save to work. -->
+                            <button type="submit" class="btn btn-primary col-md-4 editBtn" ng-click="vm.edit(vm.registrationForm)">Edit</button>   <!-- mouseover will not work with my save button if ng-disabled="registrationForm.$invalid" is in effect. I have a trade off of whether I want mouseover or disabled save to work. -->
+                        </div>
+                    </form>
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
