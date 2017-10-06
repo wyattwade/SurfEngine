@@ -125,7 +125,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right collapse navbar-collapse">
                     <li><a class="linkText" href="/Content/index.html">Index</a></li>
-                    <li><a class="linkText" href="/Content/Create.html">Create</a></li>
+                    <li data-toggle="modal" data-target="#largeModal"><a class="linkText">Create</a></li>
                 </ul>
             </div>
         </div>
@@ -183,7 +183,7 @@
                         </div><br />
 
                         <div class="myDropdown col-md-12">
-                            Minimum Heightttt
+                            Minimum Height
                             <select class='form-control  btn-default mySelect' id='min-height-drop-down' ng-model="vm.criteria.minHeight" ng-change="vm.boardSearch()">
                                 <option value="">Any</option>
                                 <option value=48>4'0</option>
@@ -451,8 +451,29 @@
                         </div>
                     </div>
                 </div>
+
+            <!--Modals-->
+            <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content col-md-12">
+                        <div class="modal-header col-md-12"  style="margin-bottom:60px">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body col-md-12" style="font-size:14px; font-weight:bold">
+                            This feature will be available for the next version of our site. Please feel free to email me with any questions or feedback.
+                            WyattElliott27@gmail.com . Thank you.
+                        </div>
+                        <div class="modal-footer col-md-12" style="margin-top:60px";>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
+
 
 
 
