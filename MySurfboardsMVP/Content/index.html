@@ -87,10 +87,6 @@
             margin-top: 5px;
         }
 
-        img {
-            width: 100%;
-        }
-
         li {
             font-size: 12px;
         }
@@ -150,7 +146,7 @@
 
 
 
-            <div class="col-md-offset-1 col-md-2 criteriaTable">
+            <div class="col-md-offset-1 col-md-2   col-xs-offset-0 col-xs-4    criteriaTable">
                 <div class=" panel panel-default">
                     <div class="panel-heading" style="height:70px">
                         <div class="panel-title" style="font-weight:bold; font-size: 18px; color:gray; margin-top: 10px">Modify Results</div>
@@ -424,14 +420,14 @@
                 <!--List Items-->
 
 
-                <div class="col-md-7 well">
+                <div class="col-md-7 col-xs-8 well">
                     <div class="col-md-12 resultsTable" style="cursor:pointer; border-top:1px solid lightgray; font-size: 10px" ng-repeat="item in vm.items" ng-click="vm.editItemBtnClick(item)">
                         <div style="height:10px;"></div> <!--whitespace-->
-                        <div class="col-md-2">
-                            <div style="height:5px;"></div> <!--whitespace-->
-                            <img  ng-src="{{item.image}}" class="" alt="" height="120" width="120">
+                        <div class="col-md-3 col-xs-3">
+                            <!--<div style="height:5px;"></div>--> <!--whitespace-->
+                            <img  ng-src="{{item.image}}" class="img-fluid" alt="" height="125" width="125">
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-7 col-xs-7">
                             <div ng-show="!item.fromInternalUser" class="lgi-heading showCurser"><h5><!--{{item.brand}}-->  {{item.name}}</h5></div> <!--from craigslist-->
                             <ul class="lgi-attrs">
                                 <br />
@@ -442,7 +438,7 @@
                                 <li class="showCurser">Price: <span>${{item.price}}</span></li>
                             </ul>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <div class="whiteSpace"></div>
                             <div class="col-md-offset-6">
                                 <button ng-show="!item.fromInternalUser" class="btn btn-default"> View </button>  <!--from craigslist-->
