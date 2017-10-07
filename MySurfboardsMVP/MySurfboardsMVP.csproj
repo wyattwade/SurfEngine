@@ -177,6 +177,7 @@
     <Content Include="Content\index.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\MySurfboardsMVP20171004093402 - Web Deploy.pubxml" />
