@@ -24,7 +24,7 @@
 
         function _boardSearch() {
             
-            var url = '../api/surfboard/search/?CurrentPage=1'
+            var url = 'http://surfengine.apphb.com/api/surfboard/search/?CurrentPage=1'
 
             // var url = 'http://surfengine.azurewebsites.net/api/surfboard/search/?CurrentPage=1'
 

@@ -14,6 +14,9 @@ namespace MySurfboardsMVP
             // Web API configuration and services
 
 
+            // enable Cross Origin Requests (CORS)
+            config.EnableCors();
+
 
             //We remove the xml serilizer to make life easier. 
             MediaTypeHeaderValue appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");

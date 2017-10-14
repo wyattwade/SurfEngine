@@ -13,6 +13,7 @@ namespace MySurfboardsMVP
     {
         protected void Application_Start()
         {
+
             UnityConfig.RegisterComponents();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
