@@ -13,9 +13,9 @@ namespace MySurfboardsMVP.Controllers
     public class SurfboardsController : ApiController
     {
 
-        readonly ISurfboardDataService surfboardDataService;
+        readonly SurfboardDataService surfboardDataService;
 
-        public SurfboardsController(ISurfboardDataService surfboardDataService)
+        public SurfboardsController(SurfboardDataService surfboardDataService)
         {
             this.surfboardDataService = surfboardDataService;
         }
@@ -26,19 +26,19 @@ namespace MySurfboardsMVP.Controllers
 
 
 
-        [Route, HttpGet]
-        public HttpResponseMessage GetMessage()
-        {
+        //[Route, HttpGet]
+        //public HttpResponseMessage GetMessage()
+        //{
 
-            //if (!ModelState.IsValid)
-            //{
-            //    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            //}
+        //    //if (!ModelState.IsValid)
+        //    //{
+        //    //    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+        //    //}
 
-            var response = new SurfboardDataService().GetAllSurfboards();
+        //    var response = new SurfboardDataService().GetAllSurfboards();
 
-            return Request.CreateResponse(HttpStatusCode.OK, response);
-        }
+        //    return Request.CreateResponse(HttpStatusCode.OK, response);
+        //}
 
 
 

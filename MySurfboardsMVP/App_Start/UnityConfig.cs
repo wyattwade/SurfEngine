@@ -16,7 +16,7 @@ namespace MySurfboardsMVP
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
-            container.RegisterType<ISurfboardDataService, SurfboardDataService>();
+            container.RegisterType<SurfboardDataService, SurfboardDataService>();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

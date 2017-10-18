@@ -13,8 +13,14 @@
         vm.editItemBtnClick = _editItemBtnClick;
         vm.boardSearch = _boardSearch;
         vm.$onInit = _boardSearch;
-        vm.criteria = {};
         vm.displayHeight = _displayHeight;
+        vm.plusPage = _plusPage;
+        vm.minusPage = _minusPage;
+        vm.criteria = {
+            currentPage: 1,
+            itemsPerPage : 40
+        };
+
 
 
         function _displayHeight(height) {
@@ -23,10 +29,10 @@
 
 
         function _boardSearch() {
-            
-            var url = 'http://surfengine.apphb.com/api/surfboard/search/?CurrentPage=1'
 
-            // var url = 'http://surfengine.azurewebsites.net/api/surfboard/search/?CurrentPage=1'
+            var url = '../api/surfboard/search/?ItemsPerPage=' + vm.criteria.itemsPerPage + '&CurrentPage=' + vm.criteria.currentPage
+
+            // var url = 'http://surfengine.apphb.com/api/surfboard/search/?CurrentPage=1'
 
 
             if (vm.criteria.location) {
@@ -79,6 +85,22 @@
                 window.open(item.link, '_blank') // new tab with third party site. 
             }
         }
+
+
+
+
+
+        function _plusPage() {
+            vm.criteria.currentPage += 1
+            console.log(vm.criteria.currentPage)
+            _boardSearch();
+        }
+
+        function _minusPage() {
+            vm.criteria.currentPage -= 1
+            _boardSearch();
+        }
+
 
     }
 })();

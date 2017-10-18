@@ -154,7 +154,7 @@
                     <div class="panel-body">
                         <div class=" myDropdown col-md-12">
                             Location
-                            <select class='form-control  btn-default mySelect' id='location-drop-down' ng-model="vm.criteria.location" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='location-drop-down' ng-model="vm.criteria.location" ng-change="vm.criteria.currentPage = 1" >
                                 <option value="">Any</option>
                                 <option value="losangeles">Los Angeles</option>
                                 <option value="sandiego">San Diego</option>
@@ -164,23 +164,24 @@
                         </div><br />
                         <div class="myDropdown  col-md-12">
                             Brand
-                            <select class='form-control  btn-default mySelect' id='make-drop-down' ng-model="vm.criteria.brand" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='make-drop-down' ng-model="vm.criteria.brand" ng-change="vm.criteria.currentPage = 1" >
                                 <option value="">Any</option>
-                                <option value="channel islands">Channel Islands</option>
-                                <option value="al merrick">Al Merrick (Channel Islands)</option>
-                                <option value="lost">Lost</option>
-                                <option value="rusty">Rusty</option>
-                                <option value="firewire">Firewire</option>
-                                <option value="hayden shapes">Hayden Shapes</option>
-                                <option value="patterson">TPatterson</option>
-                                <option value="js">JS</option>
                                 <option value="anderson">Anderson</option>
+                                <option value="al merrick">Al Merrick</option>
+                                <option value="channel islands">Channel Islands</option>
+                                <option value="dhd">DHD</option>
+                                <option value="firewire">Firewire</option>
+                                <option value="haydenshapes">Haydenshapes</option>
+                                <option value="js">JS</option>
+                                <option value="lost">Lost</option>
+                                <option value="patterson">TPatterson</option>
+                                <option value="rusty">Rusty</option>
                             </select>
                         </div><br />
 
                         <div class="myDropdown col-md-12">
                             Minimum Height
-                            <select class='form-control  btn-default mySelect' id='min-height-drop-down' ng-model="vm.criteria.minHeight" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='min-height-drop-down' ng-model="vm.criteria.minHeight" ng-change="vm.criteria.currentPage = 1" >
                                 <option value="">Any</option>
                                 <option value=48>4'0</option>
                                 <option value=49>4'1</option>
@@ -260,7 +261,7 @@
 
                         <div class="myDropdown col-md-12">
                             Maximum Height
-                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxHeight" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxHeight" ng-change="vm.criteria.currentPage = 1" >
                                 <option value="">Any</option>
                                 <option value=48>4'0</option>
                                 <option value=49>4'1</option>
@@ -340,7 +341,7 @@
 
                         <div class="myDropdown col-md-12">
                             Minimum Price
-                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.minPrice" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.minPrice" >
                                 <option value="">Any</option>
                                 <option value=0>$0</option>
                                 <option value=20>$20</option>
@@ -374,7 +375,7 @@
 
                         <div class="myDropdown col-md-12">
                             Maximum Price
-                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxPrice" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxPrice" ng-change="vm.criteria.currentPage = 1" >
                                 <option value="">Any</option>
                                 <option value=0>$0</option>
                                 <option value=20>$20</option>
@@ -411,7 +412,7 @@
                                 <option value=1500>$1500</option>
                             </select>
                         </div>
-
+                        <button class="col-xs-offset-3 btn btn-success" ng-click="vm.boardSearch()">Submit</button>
                     </div>
                 </div>
             </div>
@@ -446,6 +447,8 @@
                             </div>
                         </div>
                     </div>
+                    <button class="btn btn-default" ng-show="vm.criteria.currentPage != 1" ng-click="vm.minusPage()">Previous</button>
+                    <button class="btn btn-default" ng-show="vm.items.length == vm.criteria.itemsPerPage " ng-click="vm.plusPage()">Next</button>
                 </div>
 
             <!--Modals-->
@@ -465,7 +468,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 

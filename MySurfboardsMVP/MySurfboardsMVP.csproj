@@ -173,7 +173,6 @@
     <Compile Include="Models\BoardSearchParams.cs" />
     <Compile Include="Models\Surfboard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ISurfboardDataService.cs" />
     <Compile Include="Services\SurfboardDataService.cs" />
   </ItemGroup>
   <ItemGroup>

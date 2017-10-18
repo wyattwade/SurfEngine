@@ -9,91 +9,91 @@ using System.Data;
 
 namespace MySurfboardsMVP.Services
 {
-    public class SurfboardDataService : ISurfboardDataService
+    public class SurfboardDataService
     {
-        public List<Surfboard> GetAllSurfboards()
-        {
+        //public List<Surfboard> GetAllSurfboards()
+        //{
 
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfboardDBConnection"].ConnectionString))
-            {
-                con.Open();
+        //    using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["SurfboardDBConnection"].ConnectionString))
+        //    {
+        //        con.Open();
 
-                var cmd = con.CreateCommand();
-                cmd.CommandText = "Surfboard_GetAll";
-                cmd.CommandType = CommandType.StoredProcedure;
+        //        var cmd = con.CreateCommand();
+        //        cmd.CommandText = "Surfboard_GetAll";
+        //        cmd.CommandType = CommandType.StoredProcedure;
 
-                using (var reader = cmd.ExecuteReader())
-                {
-                    var results = new List<Surfboard>();
+        //        using (var reader = cmd.ExecuteReader())
+        //        {
+        //            var results = new List<Surfboard>();
 
-                    while (reader.Read())
-                    {
+        //            while (reader.Read())
+        //            {
 
-                        var mySurfBoard = new Surfboard();
+        //                var mySurfBoard = new Surfboard();
 
-                        if (reader["id"] != DBNull.Value)
-                        {
-                            mySurfBoard.Id = (int)reader["Id"];
-                        }
+        //                if (reader["id"] != DBNull.Value)
+        //                {
+        //                    mySurfBoard.Id = (int)reader["Id"];
+        //                }
 
-                        if (reader["Brand"] != DBNull.Value)
-                        {
-                            mySurfBoard.Brand = (string)reader["Brand"];
-                        }
+        //                if (reader["Brand"] != DBNull.Value)
+        //                {
+        //                    mySurfBoard.Brand = (string)reader["Brand"];
+        //                }
 
-                        if (reader["Name"] != DBNull.Value)
-                        {
-                            mySurfBoard.Name = (string)reader["Name"];
-                        }
+        //                if (reader["Name"] != DBNull.Value)
+        //                {
+        //                    mySurfBoard.Name = (string)reader["Name"];
+        //                }
 
-                        if (reader["Height"] != DBNull.Value)
-                        {
-                            mySurfBoard.Height = (int)reader["Height"];
-                        }
+        //                if (reader["Height"] != DBNull.Value)
+        //                {
+        //                    mySurfBoard.Height = (int)reader["Height"];
+        //                }
 
-                        if (reader["Width"] != DBNull.Value)
-                        {
-                            mySurfBoard.Width = (int)reader["Width"];
-                        }
+        //                if (reader["Width"] != DBNull.Value)
+        //                {
+        //                    mySurfBoard.Width = (int)reader["Width"];
+        //                }
 
-                        if (reader["Volume"] != DBNull.Value)
-                        {
-                            mySurfBoard.Volume = (int)reader["Volume"];
-                        }
+        //                if (reader["Volume"] != DBNull.Value)
+        //                {
+        //                    mySurfBoard.Volume = (int)reader["Volume"];
+        //                }
 
-                        if (reader["Image"] != DBNull.Value)
-                        {
-                            mySurfBoard.Image = (string)reader["Image"];
-                        }
-                        else
-                        {
-                            mySurfBoard.Image = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
-                        }
-
-
-                        if (reader["Link"] != DBNull.Value)
-                        {
-                            mySurfBoard.Link = (string)reader["Link"];
-                        }
-
-                        if (reader["Price"] != DBNull.Value)
-                        {
-                            mySurfBoard.Price = (int)reader["Price"];
-                        }
-
-                        if (reader["FromInternalUser"] != DBNull.Value)
-                        {
-                            mySurfBoard.FromInternalUser = (bool)reader["FromInternalUser"];
-                        }
+        //                if (reader["Image"] != DBNull.Value)
+        //                {
+        //                    mySurfBoard.Image = (string)reader["Image"];
+        //                }
+        //                else
+        //                {
+        //                    mySurfBoard.Image = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
+        //                }
 
 
-                        results.Add(mySurfBoard);
-                    }
+        //                if (reader["Link"] != DBNull.Value)
+        //                {
+        //                    mySurfBoard.Link = (string)reader["Link"];
+        //                }
 
-                    return results;
-                }
-            }
-        }
+        //                if (reader["Price"] != DBNull.Value)
+        //                {
+        //                    mySurfBoard.Price = (int)reader["Price"];
+        //                }
+
+        //                if (reader["FromInternalUser"] != DBNull.Value)
+        //                {
+        //                    mySurfBoard.FromInternalUser = (bool)reader["FromInternalUser"];
+        //                }
+
+
+        //                results.Add(mySurfBoard);
+        //            }
+
+        //            return results;
+        //        }
+        //    }
+        //}
 
         public Surfboard Get(int Id)
         {
@@ -262,6 +262,8 @@ namespace MySurfboardsMVP.Services
                 cmd.Parameters.AddWithValue("@MinPrice", bsp.MinPrice);
                 cmd.Parameters.AddWithValue("@MaxPrice", bsp.MaxPrice);
                 cmd.Parameters.AddWithValue("@CurrentPage", bsp.CurrentPage);
+                cmd.Parameters.AddWithValue("@ItemsPerPage", bsp.ItemsPerPage);
+
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 using (var reader = cmd.ExecuteReader())
