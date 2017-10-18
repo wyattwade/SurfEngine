@@ -5,9 +5,9 @@
 
     app.controller('MainController', MainController);
 
-    MainController.$inject = ['$http'];
+    MainController.$inject = ['$http', '$window'];
 
-    function MainController($http) {
+    function MainController($http, $window) {
 
         var vm = this;
         vm.editItemBtnClick = _editItemBtnClick;
@@ -94,6 +94,7 @@
             vm.criteria.currentPage += 1
             console.log(vm.criteria.currentPage)
             _boardSearch();
+            $window.scrollTo(0, 0);
         }
 
         function _minusPage() {
