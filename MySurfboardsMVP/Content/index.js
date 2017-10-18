@@ -16,10 +16,17 @@
         vm.displayHeight = _displayHeight;
         vm.plusPage = _plusPage;
         vm.minusPage = _minusPage;
+        vm.dataLoading = true;
         vm.criteria = {
             currentPage: 1,
             itemsPerPage : 40
         };
+
+
+
+
+
+
 
 
 
@@ -64,6 +71,8 @@
 
             function success(res) {
                 vm.items = res.data
+                vm.dataLoading = false;
+
 
                 console.log(res.data);
             }
@@ -101,7 +110,6 @@
             vm.criteria.currentPage -= 1
             _boardSearch();
         }
-
 
     }
 })();

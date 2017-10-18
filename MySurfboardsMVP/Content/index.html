@@ -420,8 +420,10 @@
 
                 <!--List Items-->
 
-
-                <div class="col-md-7 col-xs-8 well">
+                <div ng-if="vm.dataLoading">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
+                </div>
+                <div class="col-md-7 col-xs-8 well" ng-if="!vm.dataLoading">
                     <div class="col-md-12 resultsTable" style="cursor:pointer; border-top:1px solid lightgray; font-size: 10px" ng-repeat="item in vm.items" ng-click="vm.editItemBtnClick(item)">
                         <div style="height:10px;"></div> <!--whitespace-->
                         <div class="col-md-3 col-xs-3">
