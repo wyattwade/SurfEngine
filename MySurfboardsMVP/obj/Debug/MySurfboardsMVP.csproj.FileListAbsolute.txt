@@ -93,3 +93,14 @@ C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Microsoft.WindowsAzure.Configurat
 C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\System.Web.Cors.dll
 C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\System.Web.Http.Cors.dll
 C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\System.Web.Http.Cors.xml
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Hangfire.Core.dll
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Hangfire.SqlServer.dll
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Microsoft.Owin.dll
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Owin.dll
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Hangfire.Core.xml
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Hangfire.SqlServer.xml
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Microsoft.Owin.xml
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\es\Hangfire.Core.resources.dll
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\zh\Hangfire.Core.resources.dll

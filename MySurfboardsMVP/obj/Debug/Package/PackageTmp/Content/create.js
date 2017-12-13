@@ -1,7 +1,9 @@
 ﻿// main module
 (function () {
-    angular.module('MainApp', []);
+    angular.module('MainApp', ['uiCropper']);
 })();
+
+
 
 // blog service
 (function () {
@@ -143,24 +145,106 @@
 angular.module('MainApp')
     .controller('PostController', PostController);
 
-//  dataservice.$inject = ['$http'];
 
-PostController.$inject = ['postService'];
+PostController.$inject = ['postService', '$scope'];
 
-function PostController(postService) {
+function PostController(postService, $scope) {
 
     var vm = this;
 
+    vm.startImage = 'https://www.neto.com.au/assets/images/default_product.gif';
+    vm.startImage2 = 'https://www.neto.com.au/assets/images/default_product.gif';
+    vm.startImage3 = 'https://www.neto.com.au/assets/images/default_product.gif';
+    vm.startImage4 = 'https://www.neto.com.au/assets/images/default_product.gif';
+
+
+
     vm.save = _save;
-     vm.edit = _edit;
-     vm.delete = _delete;
+    vm.edit = _edit;
+    vm.delete = _delete;
     vm.showEdit = false;
     vm.showValidationError = _showValidationError;
+    vm.handleFileSelect = _handleFileSelect;
     vm.submitClicked = false; // when mouse hovers over submit, this is set to true.
+    vm.savePhoto = _savePhoto;
     vm.savedId = "";
     vm.$onInit = _getUrlParams;
     vm.item = {
+        image : '',
+        image2 : '',
+        image3 : '',
+        image4 : ''
     }
+
+
+
+
+
+    function _savePhoto(imageNum) {
+        console.log('save')
+
+
+        switch (imageNum) {
+            case 1:
+                vm.startImage = vm.item.image;
+                break;
+            case 2:
+                vm.startImage2 = vm.item.image2;
+                break;
+            case 3:
+                vm.startImage3 = vm.item.image3;
+                break;
+            case 4:
+                vm.startImage4 = vm.item.image4;
+                break;
+        }
+    }
+
+
+
+    function _handleFileSelect(imageNum, evt) {
+
+        console.log(imageNum)
+
+        var file = evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            $scope.$apply(function ($scope) {
+                switch (imageNum) {
+                    case 1:
+                        vm.startImage = evt.target.result;
+                        break;
+                    case 2:
+                        vm.startImage2 = evt.target.result;
+                        break;
+                    case 3:
+                        vm.startImage3 = evt.target.result;
+                        break;
+                    case 4:
+                        vm.startImage4 = evt.target.result;
+                        break;
+                }
+
+
+
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+
+    angular.element(document.querySelector('#fileInput')).on('change', _handleFileSelect.bind(null, 1));
+    angular.element(document.querySelector('#fileInput2')).on('change', _handleFileSelect.bind(null, 2));
+    angular.element(document.querySelector('#fileInput3')).on('change', _handleFileSelect.bind(null, 3));
+    angular.element(document.querySelector('#fileInput4')).on('change', _handleFileSelect.bind(null, 4));
+
+
+
+
+
+
+
+
+
 
     function _getUrlParams() {
         //  var paramValue = $location.search().Id;
@@ -234,7 +318,7 @@ function PostController(postService) {
 
 
     function _showValidationError(inputProperty) {
-        var result = ((vm.registrationForm[inputProperty].$invalid && !vm.registrationForm[inputProperty].$pristine) || (vm.registrationForm[inputProperty].$invalid && vm.submitClicked))
+        var result = (/*(vm.registrationForm[inputProperty].$invalid && !vm.registrationForm[inputProperty].$pristine) || */(vm.registrationForm[inputProperty].$invalid && vm.submitClicked))
         return result;
     }
 }

@@ -5,16 +5,29 @@
 
     app.controller('MainController', MainController);
 
-    MainController.$inject = ['$http'];
+    MainController.$inject = ['$http', '$window'];
 
-    function MainController($http) {
+    function MainController($http, $window) {
 
         var vm = this;
         vm.editItemBtnClick = _editItemBtnClick;
         vm.boardSearch = _boardSearch;
         vm.$onInit = _boardSearch;
-        vm.criteria = {};
         vm.displayHeight = _displayHeight;
+        vm.plusPage = _plusPage;
+        vm.minusPage = _minusPage;
+        vm.dataLoading = true;
+        vm.criteria = {
+            currentPage: 1,
+            itemsPerPage : 40
+        };
+
+
+
+
+
+
+
 
 
         function _displayHeight(height) {
@@ -23,10 +36,10 @@
 
 
         function _boardSearch() {
-            
-            var url = '../api/surfboard/search/?CurrentPage=1'
 
-            // var url = 'http://surfengine.azurewebsites.net/api/surfboard/search/?CurrentPage=1'
+            var url = '../api/surfboard/search/?ItemsPerPage=' + vm.criteria.itemsPerPage + '&CurrentPage=' + vm.criteria.currentPage
+
+            // var url = 'http://surfengine.apphb.com/api/surfboard/search/?CurrentPage=1'
 
 
             if (vm.criteria.location) {
@@ -58,6 +71,8 @@
 
             function success(res) {
                 vm.items = res.data
+                vm.dataLoading = false;
+
 
                 console.log(res.data);
             }
@@ -78,6 +93,22 @@
             else {
                 window.open(item.link, '_blank') // new tab with third party site. 
             }
+        }
+
+
+
+
+
+        function _plusPage() {
+            vm.criteria.currentPage += 1
+            console.log(vm.criteria.currentPage)
+            _boardSearch();
+            $window.scrollTo(0, 0);
+        }
+
+        function _minusPage() {
+            vm.criteria.currentPage -= 1
+            _boardSearch();
         }
 
     }

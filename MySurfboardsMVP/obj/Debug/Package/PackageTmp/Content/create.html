@@ -3,6 +3,9 @@
 <head>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/CrackerakiUA/ui-cropper/master/compile/minified/ui-cropper.css">
+
+    
     <style>
         body {
             background-color: white;
@@ -25,6 +28,37 @@
             font-size: 20px;
             font-family: Calibri;
         }
+
+        .companyLogo1 {
+            width: 100%;
+        }
+
+        .companyLogo2 {
+            width: 70%;
+            padding-bottom: 7px;
+        }
+
+        .img-responsive {
+            /*width: 100%*/
+        }
+
+        input{
+            margin-top: 3px;
+        }
+
+        .cropArea {
+            background: #E4E4E4;
+            overflow: hidden;
+            width: 500px;
+            height: 350px;
+        }
+
+        .padding-0 {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+
     </style>
     <meta charset="utf-8" />
     <title></title>
@@ -46,7 +80,9 @@
 <body>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+    <script src="https://rawgit.com/CrackerakiUA/ui-cropper/master/compile/unminified/ui-cropper.js"></script>
     <script src="create.js"></script>
 
     <!--navbar-->
@@ -67,39 +103,170 @@
 
 
     <div ng-app="MainApp">
-        <div ng-controller="PostController as vm" class="row col-md-offset-3 col-md-6 well">
+        <div ng-controller="PostController as vm" class="row col-xs-offset-1 col-xs-10 well">
 
             <!--<pre>{{vm.item|json}}</pre>-->
 
-                    <form name="vm.registrationForm" class="col-md-12" novalidate>
-                        <div class="form-group col-md-6" ng-class="{'has-error' :  vm.showValidationError('brand')}">
-                            <input name="brand" type="text" class="form-control" ng-model="vm.item.brand" required placeholder="Brand" />
+            <div class="col-xs-12" style="height: 10px"></div> <!--whitespace-->
+
+
+            <form name="vm.registrationForm" class="col-xs-12" novalidate>
+                <div class="col-xs-offset-1 col-xs-10">
+
+                    <div class="col-xs-6"> <!--images-->
+                        <div class="col-xs-8 padding-0" style="z-index:2;" data-toggle="modal" data-target="#myModal">
+                            <a href="">
+                                <img class="img-responsive companyLogo1" ng-src="{{vm.startImage}}" alt="">
+                            </a>
+                        </div>
+
+
+                        <div class="col-xs-4">
+                            <div class="col-xs-12 padding-0" style="z-index:2;" data-toggle="modal" data-target="#myModal2">
+                                <a href="">
+                                    <img class="img-responsive companyLogo2" ng-src="{{vm.startImage2}}" alt="">
+                                </a>
+                            </div>
+
+                            <div class="col-xs-12 padding-0" style="z-index:2;" data-toggle="modal" data-target="#myModal3">
+                                <a href="">
+                                    <img class="img-responsive companyLogo2" ng-src="{{vm.startImage3}}" alt="">
+                                </a>
+                            </div>
+
+                            <div class="col-xs-12 padding-0" style="z-index:2;" data-toggle="modal" data-target="#myModal4">
+                                <a href="">
+                                    <img class="img-responsive companyLogo2" ng-src="{{vm.startImage4}}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-xs-6" style="height: 0px"></div> <!--whitespace-->
+
+                    <div class="col-xs-6">
+                        <div class="form-group col-xs-12" ng-class="{'has-error' :  vm.showValidationError('brand')}">
+                            <input name="brand" type="text" class="form-control " ng-model="vm.item.brand" required placeholder="Brand" />
                             <span ng-show="(vm.showValidationError('brand'))" class="help-block">Please enter the brand</span>
                         </div>
-                        <div class="form-group col-md-6" ng-class="{'has-error' : vm.showValidationError('name')}">
-                            <input name="name" type="text" class="form-control" ng-model="vm.item.name" required placeholder="Model Name" />
+                        <div class="form-group col-xs-12" ng-class="{'has-error' : vm.showValidationError('name')}">
+                            <input name="name" type="text" class="form-control " ng-model="vm.item.name" required placeholder="Model Name" />
                             <p ng-show="vm.showValidationError('name')" class="help-block">Please enter the model name</p>
                         </div>
-                        <div class="form-group col-md-12" ng-class="{'has-error' : vm.showValidationError('height')}">
-                            <input type="text" name="height" class="form-control" ng-model="vm.item.height" required placeholder="Height"/>
+                        <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('shape')}">
+                            <input type="text" name="shape" class="form-control " ng-model="vm.item.shape" required placeholder="Shape" />
+                            <p ng-show="vm.showValidationError('shape')" class="help-block">Must be 5 digits</p>
+                        </div>
+                        <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('height')}">
+                            <input type="text" name="height" class="form-control " ng-model="vm.item.height" required placeholder="Height" />
                             <p ng-show="vm.showValidationError('height')" class="help-block">Height</p>
                         </div>
-                        <div class="form-group col-md-12" ng-class="{'has-error' : vm.showValidationError('width')}">
-                            <input type="text" name="width" class="form-control" ng-model="vm.item.width" required placeholder="Width" />
+                        <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('width')}">
+                            <input type="text" name="width" class="form-control " ng-model="vm.item.width" required placeholder="Width" />
                             <p ng-show="vm.showValidationError('width')" class="help-block">Please enter the width</p>
                         </div>
-                        <div class="form-group col-md-12" ng-class="{'has-error' : vm.showValidationError('volume')}">
-                            <input type="text" name="volume" class="form-control" ng-model="vm.item.volume" required placeholder="Volume" />
+                        <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('volume')}">
+                            <input type="text" name="volume" class="form-control " ng-model="vm.item.volume" required placeholder="Volume" />
                             <p ng-show="vm.showValidationError('volume')" class="help-block">Please enter the volume</p>
                         </div>
-                        <div class="col-md-12" ng-show="vm.showEdit == false">
-                            <button type="submit" class="btn btn-primary col-md-3 saveBtn" ng-click="vm.save(vm.registrationForm)">Save</button>   <!-- mouseover will not work with my save button if ng-disabled="registrationForm.$invalid" is in effect. I have a trade off of whether I want mouseover or disabled save to work. -->
+                        <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('city')}">
+                            <input type="text" name="city" class="form-control " ng-model="vm.item.city" required placeholder="City" />
+                            <p ng-show="vm.showValidationError('city')" class="help-block">Please enter the city</p>
                         </div>
-                        <div class="col-md-12" ng-show="vm.showEdit == true">
-                            <button type="submit" class="btn btn-danger col-md-4 editBtn" ng-click="vm.delete(vm.registrationForm)" >Delete</button>   <!-- mouseover will not work with my save button if ng-disabled="registrationForm.$invalid" is in effect. I have a trade off of whether I want mouseover or disabled save to work. -->
-                            <button type="submit" class="btn btn-primary col-md-4 editBtn" ng-click="vm.edit(vm.registrationForm)">Edit</button>   <!-- mouseover will not work with my save button if ng-disabled="registrationForm.$invalid" is in effect. I have a trade off of whether I want mouseover or disabled save to work. -->
+                        <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('zip')}">
+                            <input type="text" name="zip" class="form-control " ng-model="vm.item.zip" required placeholder="Zip-Code" minlength="5" maxlength="5" />
+                            <p ng-show="vm.showValidationError('zip')" class="help-block">Must be 5 digits</p>
                         </div>
-                    </form>
+                        <div class="form-group col-xs-12" ng-class="{'has-error' : vm.showValidationError('email')}">
+                            <input type="email" name="email" class="form-control " ng-model="vm.item.email" required placeholder="Email" minlength="5" maxlength="75" />
+                            <p ng-show="vm.showValidationError('email')" class="Please enter your email address"</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-12" style="height:25px;"></div> <!--whitespace-->
+
+                    <div class="col-xs-12">
+                        <textarea class="form-control" rows="8" placeholder="Description"></textarea>
+                    </div>
+                </div>
+
+
+                <!--buttons-->
+
+                <div class="col-xs-12" style="height:45px;"></div> <!--whitespace-->
+
+                <div class="col-xs-offset-6 col-xs-5" ng-show="vm.showEdit == false">
+                    <button type="submit" class="btn btn-lg btn-success col-xs-offset-6 col-xs-5 saveBtn" ng-click="vm.save(vm.registrationForm)">Save</button>   <!-- mouseover will not work with my save button if ng-disabled="registrationForm.$invalid" is in effect. I have a trade off of whether I want mouseover or disabled save to work. -->
+                </div>
+
+                <div class="col-xs-12" ng-show="vm.showEdit == true">
+                    <button type="submit" class="btn btn-danger col-xs-4 editBtn" ng-click="vm.delete(vm.registrationForm)">Delete</button>   <!-- mouseover will not work with my save button if ng-disabled="registrationForm.$invalid" is in effect. I have a trade off of whether I want mouseover or disabled save to work. -->
+                    <button type="submit" class="btn btn-primary col-xs-4 editBtn" ng-click="vm.edit(vm.registrationForm)">Edit</button>   <!-- mouseover will not work with my save button if ng-disabled="registrationForm.$invalid" is in effect. I have a trade off of whether I want mouseover or disabled save to work. -->
+                </div>
+            </form>
+
+
+
+
+
+
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Upload Logo</h3>
+                            <div>Select a Logo file: <input type="file" id="fileInput" accept="image/x-png,image/gif,image/jpeg" /></div>
+                            <div class="cropArea">
+                                <ui-cropper image="vm.startImage" area-type="rectangle" result-image="vm.item.image" result-image-size="500"></ui-cropper>
+                            </div>  
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success" ng-click="vm.savePhoto(1)" data-dismiss="modal" ">Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+            <div id="myModal2" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Upload Logo</h3>
+                            <div>Select a Logo file: <input type="file" id="fileInput2" accept="image/x-png,image/gif,image/jpeg" /></div>
+                            <div class="cropArea">
+                                <ui-cropper image="vm.startImage2" area-type="rectangle" result-image="vm.item.image2" result-image-size="500"></ui-cropper>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success" ng-click="vm.savePhoto(2)" data-dismiss="modal" ">Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
 
 
@@ -107,7 +274,77 @@
 
 
 
-        </div>
+
+
+            <div id="myModal3" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Upload Logo</h3>
+                            <div>Select a Logo file: <input type="file" id="fileInput3" accept="image/x-png,image/gif,image/jpeg" /></div>
+                            <div class="cropArea">
+                                <ui-cropper image="vm.startImage3" area-type="rectangle" result-image="vm.item.image3" result-image-size="500"></ui-cropper>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success" ng-click="vm.savePhoto(3)" data-dismiss="modal" ">Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div id="myModal4" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Upload Logo</h3>
+                            <div>Select a Logo file: <input type="file" id="fileInput4" accept="image/x-png,image/gif,image/jpeg" /></div>
+                            <div class="cropArea">
+                                <ui-cropper image="vm.startImage4" area-type="rectangle" result-image="vm.item.image4" result-image-size="500"></ui-cropper>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success" ng-click="vm.savePhoto(4)" data-dismiss="modal" ">Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div> <!--end of controller-->
     </div>
 
 

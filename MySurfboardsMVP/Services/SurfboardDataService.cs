@@ -178,7 +178,9 @@ namespace MySurfboardsMVP.Services
                     SqlParameter idParameter = new SqlParameter("@Id", System.Data.SqlDbType.Int);
                     idParameter.Direction = System.Data.ParameterDirection.Output;
 
+                    //cmd.Parameters.Add(idParameter);
                     cmd.Parameters.Add(idParameter);
+
 
 
                     cmd.ExecuteNonQuery();

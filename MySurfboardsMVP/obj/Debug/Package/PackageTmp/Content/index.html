@@ -87,10 +87,6 @@
             margin-top: 5px;
         }
 
-        img {
-            width: 100%;
-        }
-
         li {
             font-size: 12px;
         }
@@ -125,7 +121,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right collapse navbar-collapse">
                     <li><a class="linkText" href="/Content/index.html">Index</a></li>
-                    <li><a class="linkText" href="/Content/Create.html">Create</a></li>
+                    <li data-toggle="modal" data-target="#largeModal"><a class="linkText">Create</a></li>
                 </ul>
             </div>
         </div>
@@ -150,7 +146,7 @@
 
 
 
-            <div class="col-md-offset-1 col-md-2 criteriaTable">
+            <div class="col-md-offset-1 col-md-2   col-xs-offset-0 col-xs-4    criteriaTable">
                 <div class=" panel panel-default">
                     <div class="panel-heading" style="height:70px">
                         <div class="panel-title" style="font-weight:bold; font-size: 18px; color:gray; margin-top: 10px">Modify Results</div>
@@ -158,7 +154,7 @@
                     <div class="panel-body">
                         <div class=" myDropdown col-md-12">
                             Location
-                            <select class='form-control  btn-default mySelect' id='location-drop-down' ng-model="vm.criteria.location" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='location-drop-down' ng-model="vm.criteria.location" ng-change="vm.criteria.currentPage = 1" >
                                 <option value="">Any</option>
                                 <option value="losangeles">Los Angeles</option>
                                 <option value="sandiego">San Diego</option>
@@ -168,23 +164,24 @@
                         </div><br />
                         <div class="myDropdown  col-md-12">
                             Brand
-                            <select class='form-control  btn-default mySelect' id='make-drop-down' ng-model="vm.criteria.brand" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='make-drop-down' ng-model="vm.criteria.brand" ng-change="vm.criteria.currentPage = 1" >
                                 <option value="">Any</option>
-                                <option value="channel islands">Channel Islands</option>
-                                <option value="al merrick">Al Merrick (Channel Islands)</option>
-                                <option value="lost">Lost</option>
-                                <option value="rusty">Rusty</option>
-                                <option value="firewire">Firewire</option>
-                                <option value="hayden shapes">Hayden Shapes</option>
-                                <option value="patterson">TPatterson</option>
-                                <option value="js">JS</option>
                                 <option value="anderson">Anderson</option>
+                                <option value="al merrick">Al Merrick</option>
+                                <option value="channel islands">Channel Islands</option>
+                                <option value="dhd">DHD</option>
+                                <option value="firewire">Firewire</option>
+                                <option value="haydenshapes">Haydenshapes</option>
+                                <option value="js">JS</option>
+                                <option value="lost">Lost</option>
+                                <option value="patterson">TPatterson</option>
+                                <option value="rusty">Rusty</option>
                             </select>
                         </div><br />
 
                         <div class="myDropdown col-md-12">
-                            Minimum Heightttt
-                            <select class='form-control  btn-default mySelect' id='min-height-drop-down' ng-model="vm.criteria.minHeight" ng-change="vm.boardSearch()">
+                            Minimum Height
+                            <select class='form-control  btn-default mySelect' id='min-height-drop-down' ng-model="vm.criteria.minHeight" ng-change="vm.criteria.currentPage = 1" >
                                 <option value="">Any</option>
                                 <option value=48>4'0</option>
                                 <option value=49>4'1</option>
@@ -264,7 +261,7 @@
 
                         <div class="myDropdown col-md-12">
                             Maximum Height
-                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxHeight" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxHeight" ng-change="vm.criteria.currentPage = 1" >
                                 <option value="">Any</option>
                                 <option value=48>4'0</option>
                                 <option value=49>4'1</option>
@@ -344,7 +341,7 @@
 
                         <div class="myDropdown col-md-12">
                             Minimum Price
-                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.minPrice" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.minPrice" >
                                 <option value="">Any</option>
                                 <option value=0>$0</option>
                                 <option value=20>$20</option>
@@ -378,7 +375,7 @@
 
                         <div class="myDropdown col-md-12">
                             Maximum Price
-                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxPrice" ng-change="vm.boardSearch()">
+                            <select class='form-control  btn-default mySelect' id='max-height-drop-down' ng-model="vm.criteria.maxPrice" ng-change="vm.criteria.currentPage = 1" >
                                 <option value="">Any</option>
                                 <option value=0>$0</option>
                                 <option value=20>$20</option>
@@ -415,7 +412,7 @@
                                 <option value=1500>$1500</option>
                             </select>
                         </div>
-
+                        <button class="col-xs-offset-3 btn btn-success" ng-click="vm.boardSearch()">Submit</button>
                     </div>
                 </div>
             </div>
@@ -423,15 +420,17 @@
 
                 <!--List Items-->
 
-
-                <div class="col-md-7 well">
+                <div ng-if="vm.dataLoading">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
+                </div>
+                <div class="col-md-7 col-xs-8 well" ng-if="!vm.dataLoading">
                     <div class="col-md-12 resultsTable" style="cursor:pointer; border-top:1px solid lightgray; font-size: 10px" ng-repeat="item in vm.items" ng-click="vm.editItemBtnClick(item)">
                         <div style="height:10px;"></div> <!--whitespace-->
-                        <div class="col-md-2">
-                            <div style="height:5px;"></div> <!--whitespace-->
-                            <img  ng-src="{{item.image}}" class="" alt="" height="120" width="120">
+                        <div class="col-md-3 col-xs-3">
+                            <!--<div style="height:5px;"></div>--> <!--whitespace-->
+                            <img  ng-src="{{item.image}}" class="img-fluid" alt="" height="125" width="125">
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-7 col-xs-7">
                             <div ng-show="!item.fromInternalUser" class="lgi-heading showCurser"><h5><!--{{item.brand}}-->  {{item.name}}</h5></div> <!--from craigslist-->
                             <ul class="lgi-attrs">
                                 <br />
@@ -442,7 +441,7 @@
                                 <li class="showCurser">Price: <span>${{item.price}}</span></li>
                             </ul>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2">
                             <div class="whiteSpace"></div>
                             <div class="col-md-offset-6">
                                 <button ng-show="!item.fromInternalUser" class="btn btn-default"> View </button>  <!--from craigslist-->
@@ -450,9 +449,31 @@
                             </div>
                         </div>
                     </div>
+                    <button class="btn btn-default" ng-show="vm.criteria.currentPage != 1" ng-click="vm.minusPage()">Previous</button>
+                    <button class="btn btn-default" ng-show="vm.items.length == vm.criteria.itemsPerPage " ng-click="vm.plusPage()">Next</button>
                 </div>
+
+            <!--Modals-->
+            <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content col-md-12">
+                        <div class="modal-header col-md-12"  style="margin-bottom:60px">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body col-md-12" style="font-size:14px; font-weight:bold">
+                            This feature will be available for the next version of our site. Please feel free to email me with any questions or feedback.
+                            WyattElliott27@gmail.com . Thank you.
+                        </div>
+                        <div class="modal-footer col-md-12" style="margin-top:60px";>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
 
 
 

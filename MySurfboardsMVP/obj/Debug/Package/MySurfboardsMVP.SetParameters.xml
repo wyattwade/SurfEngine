@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Default Web Site/" />
+  <setParameter name="SurfboardDBConnection-Web.config Connection String" value="Server=tcp:mysurfboardsmvp20171004093402dbserver.database.windows.net,1433;Initial Catalog=MySurfboardsMVP20171004093402_db;Persist Security Info=False;User ID=wyattelliott;Password=Mango123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" />
+</parameters>
