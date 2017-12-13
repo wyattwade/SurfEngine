@@ -104,3 +104,5 @@ C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Microsoft.Owin.xml
 C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\es\Hangfire.Core.resources.dll
 C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\zh\Hangfire.Core.resources.dll
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\AngleSharp.dll
+C:\SF.Code\MySurfboardsMVP\MySurfboardsMVP\bin\AngleSharp.xml

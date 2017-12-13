@@ -11,7 +11,7 @@ namespace MySurfboardsMVP.Models
         public string Brand { get; set; }
         public string Name { get; set; }
         public string Shape { get; set; }
-        public int Height { get; set; }
+        public int? Height { get; set; }
         public int Width { get; set; }
         public int Volume { get; set; }
         public int Price { get; set; }
@@ -23,5 +23,7 @@ namespace MySurfboardsMVP.Models
         public string Email { get; set; }
         public bool FromInternalUser { get; set; }
         public int TotalRows { get; set; }
+        public string Location { get; set; }
+
     }
 }
