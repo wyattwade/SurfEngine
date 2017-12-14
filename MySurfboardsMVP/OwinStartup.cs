@@ -28,7 +28,7 @@ namespace MyWebApplication
 
 
             // Recurring
-         //   RecurringJob.AddOrUpdate(() => ScrappingController.ScrappingFunction(), "*/10 * * * *");
+         //   RecurringJob.AddOrUpdate(() => ScrappingController.ScrappingFunction(), Cron.Daily);
 
 
         }
