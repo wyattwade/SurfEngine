@@ -65,12 +65,12 @@ namespace MySurfboardsMVP.Controllers
 
 
 
-                var Locations = new string[] { "losangeles", "orangecounty", "sfbay" };   /*"sandiego"*/
+                var Locations = new string[] { "losangeles" };   /*"sandiego" , "orangecounty", "sfbay" */
 
-                for (var i = 0; i < Locations.Length; i++)
+            for (var i = 0; i < Locations.Length; i++)
                 {
 
-                    for (var listing = 0; listing < 1500; listing += 120)
+                    for (var listing = 0; listing <= 130; listing += 120) // changed from 1500 to 130
                     {
 
                         Console.WriteLine(listing);
