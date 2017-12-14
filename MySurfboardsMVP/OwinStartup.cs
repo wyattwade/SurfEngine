@@ -24,8 +24,7 @@ namespace MyWebApplication
             var owinContext = new OwinContext(context.GetOwinEnvironment());
 
             // Allow all authenticated users to see the Dashboard (potentially dangerous).
-            // return owinContext.Authentication.User.Identity.IsAuthenticated;
-            return true;
+            return owinContext.Authentication.User.Identity.IsAuthenticated;
         }
     }
 
