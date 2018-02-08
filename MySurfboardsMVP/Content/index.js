@@ -19,10 +19,10 @@
         vm.dataLoading = true;
         vm.criteria = {
             currentPage: 1,
-            itemsPerPage : 40
+            itemsPerPage : 20
         };
 
-
+        
 
 
 

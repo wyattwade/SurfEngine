@@ -121,7 +121,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right collapse navbar-collapse">
                     <li><a class="linkText" href="/Content/index.html">Index</a></li>
-                    <li data-toggle="modal" data-target="#largeModal"><a class="linkText">Create</a></li>
+                    <!--<li data-toggle="modal" data-target="#largeModal"><a class="linkText">Create</a></li>-->
+                    <li><a class="linkText" href="/Content/create.html">Create</a></li>
+
                 </ul>
             </div>
         </div>
@@ -423,13 +425,22 @@
                 <div ng-if="vm.dataLoading">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
                 </div>
+            <!--<pre>{{vm.items}}</pre>-->
                 <div class="col-md-7 col-xs-8 well" ng-if="!vm.dataLoading">
                     <div class="col-md-12 resultsTable" style="cursor:pointer; border-top:1px solid lightgray; font-size: 10px" ng-repeat="item in vm.items" ng-click="vm.editItemBtnClick(item)">
-                        <div style="height:10px;"></div> <!--whitespace-->
-                        <div class="col-md-3 col-xs-3">
-                            <!--<div style="height:5px;"></div>--> <!--whitespace-->
+                       <!--<pre>{{item}}</pre>-->
+                        <div style="height:10px;"></div> 
+
+
+                        <div class="col-md-3 col-xs-3" ng-show="!item.fromInternalUser">
                             <img  ng-src="{{item.image}}" class="img-fluid" alt="" height="125" width="125">
                         </div>
+
+                        <div class="col-md-3 col-xs-3" ng-show="item.fromInternalUser">
+                            <img ng-src="{{item.image1}}" class="img-fluid" alt="" height="125" width="125">
+                        </div>                        
+
+
                         <div class="col-md-7 col-xs-7">
                             <div ng-show="!item.fromInternalUser" class="lgi-heading showCurser"><h5><!--{{item.brand}}-->  {{item.name}}</h5></div> <!--from craigslist-->
                             <ul class="lgi-attrs">

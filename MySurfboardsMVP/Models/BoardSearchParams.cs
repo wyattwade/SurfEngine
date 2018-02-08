@@ -10,6 +10,7 @@ namespace MySurfboardsMVP.Models
         public string Location { get; set; }
         public string Brand { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public int? MinWidth { get; set; }
         public int? MaxWidth { get; set; }
         public int? MinHeight { get; set; }

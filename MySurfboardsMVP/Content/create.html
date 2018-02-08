@@ -7,6 +7,11 @@
 
     
     <style>
+
+        label{
+            margin-bottom:0px;
+        }
+
         body {
             background-color: white;
         }
@@ -58,6 +63,14 @@
             padding-left: 0;
         }
 
+        .currencyinput {
+            border: 1px inset #ccc;
+        }
+
+        .currencyinput input {
+            border: 0;
+        }
+
 
     </style>
     <meta charset="utf-8" />
@@ -105,38 +118,40 @@
     <div ng-app="MainApp">
         <div ng-controller="PostController as vm" class="row col-xs-offset-1 col-xs-10 well">
 
-            <!--<pre>{{vm.item|json}}</pre>-->
+            <pre>{{vm.item|json}}</pre>
 
             <div class="col-xs-12" style="height: 10px"></div> <!--whitespace-->
 
 
             <form name="vm.registrationForm" class="col-xs-12" novalidate>
-                <div class="col-xs-offset-1 col-xs-10">
+                <div class="col-xs-12">
 
                     <div class="col-xs-6"> <!--images-->
                         <div class="col-xs-8 padding-0" style="z-index:2;" data-toggle="modal" data-target="#myModal">
                             <a href="">
-                                <img class="img-responsive companyLogo1" ng-src="{{vm.startImage}}" alt="">
+                                <img class="img-responsive companyLogo1" ng-src="{{vm.item.image1 || '/Images/camera.jpg' }}" alt="">
                             </a>
                         </div>
+                  
+
 
 
                         <div class="col-xs-4">
                             <div class="col-xs-12 padding-0" style="z-index:2;" data-toggle="modal" data-target="#myModal2">
                                 <a href="">
-                                    <img class="img-responsive companyLogo2" ng-src="{{vm.startImage2}}" alt="">
+                                    <img class="img-responsive companyLogo2" ng-src="{{vm.item.image2 || '/Images/camera.jpg' }}" alt="">
                                 </a>
                             </div>
 
                             <div class="col-xs-12 padding-0" style="z-index:2;" data-toggle="modal" data-target="#myModal3">
                                 <a href="">
-                                    <img class="img-responsive companyLogo2" ng-src="{{vm.startImage3}}" alt="">
+                                    <img class="img-responsive companyLogo2" ng-src="{{vm.item.image3 || '/Images/camera.jpg' }}" alt="">
                                 </a>
                             </div>
 
                             <div class="col-xs-12 padding-0" style="z-index:2;" data-toggle="modal" data-target="#myModal4">
                                 <a href="">
-                                    <img class="img-responsive companyLogo2" ng-src="{{vm.startImage4}}" alt="">
+                                    <img class="img-responsive companyLogo2" ng-src="{{vm.item.image4 || '/Images/camera.jpg' }}" alt="">
                                 </a>
                             </div>
                         </div>
@@ -148,40 +163,179 @@
 
                     <div class="col-xs-6">
                         <div class="form-group col-xs-12" ng-class="{'has-error' :  vm.showValidationError('brand')}">
-                            <input name="brand" type="text" class="form-control " ng-model="vm.item.brand" required placeholder="Brand" />
-                            <span ng-show="(vm.showValidationError('brand'))" class="help-block">Please enter the brand</span>
+                            <label>Brand</label>
+                            <input name="brand" type="text" class="form-control " ng-model="vm.item.brand" required placeholder="ex/ Al Merrick" />
+                            <!--<span ng-show="(vm.showValidationError('brand'))" class="help-block">Please enter the brand</span>-->
                         </div>
                         <div class="form-group col-xs-12" ng-class="{'has-error' : vm.showValidationError('name')}">
-                            <input name="name" type="text" class="form-control " ng-model="vm.item.name" required placeholder="Model Name" />
-                            <p ng-show="vm.showValidationError('name')" class="help-block">Please enter the model name</p>
+                            <label>Model Name</label>
+                            <input name="name" type="text" class="form-control " ng-model="vm.item.name" required placeholder="ex/ Flyer" />
+                            <!--<p ng-show="vm.showValidationError('name')" class="help-block">Please enter the model name</p>-->
                         </div>
-                        <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('shape')}">
-                            <input type="text" name="shape" class="form-control " ng-model="vm.item.shape" required placeholder="Shape" />
-                            <p ng-show="vm.showValidationError('shape')" class="help-block">Must be 5 digits</p>
+                        <div class="form-group col-xs-12" ng-class="{'has-error' : vm.showValidationError('shape')}">
+                            <label>Shape</label>
+                            <select class="form-control  btn-default mySelect" name="shape" ng-model="vm.item.shape" required>
+                                <option value="">&nbsp;</option>
+                                <option value="Shortborad">Shortborad</option>
+                                <option value="Longboard">Longboard</option>
+                                <option value="Fish">Fish</option>
+                                <option value="Gun">Gun</option>
+                                <option value="Funboard">Funboard</option>
+                                <option value="Hybrid">Hybrid</option>
+                                <option value="Other">Other</option>
+
+
+                            </select>
+                            <!--<p ng-show="vm.showValidationError('shape')" class="help-block">Please select a shape</p>-->
                         </div>
-                        <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('height')}">
-                            <input type="text" name="height" class="form-control " ng-model="vm.item.height" required placeholder="Height" />
-                            <p ng-show="vm.showValidationError('height')" class="help-block">Height</p>
+
+
+
+
+
+
+
+
+
+                        <div class="form-group col-xs-3" style="padding-right:0;" ng-class="{'has-error' : vm.showValidationError('height1')}">
+                            <label>Feet</label>
+                            <select class="form-control  btn-default mySelect" name="height1" ng-model="vm.item.height1" required>
+                                <option value="">&nbsp;</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                                <option value=6>6</option>
+                                <option value=7>7</option>
+                                <option value=8>8</option>
+                                <option value=9>9</option>
+                                <option value=10>10</option>
+                                <option value=11>11</option>
+                                <option value=12>12</option>
+                                <option value=13>13</option>
+                                <option value=14>14</option>
+                            </select>
+                            <!--<p ng-show="vm.showValidationError('height1')" class="help-block">Enter Feet</p>-->
                         </div>
-                        <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('width')}">
-                            <input type="text" name="width" class="form-control " ng-model="vm.item.width" required placeholder="Width" />
-                            <p ng-show="vm.showValidationError('width')" class="help-block">Please enter the width</p>
+                        <div class="form-group col-xs-3" style="padding-left:0;" ng-class="{'has-error' : vm.showValidationError('height2')}">
+                            <label>Inches</label>
+                            <select class="form-control  btn-default mySelect" name="height2" ng-model="vm.item.height2" required>
+                                <option value="">&nbsp;</option>
+                                <option value=0>0</option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                                <option value=6>6</option>
+                                <option value=7>7</option>
+                                <option value=8>8</option>
+                                <option value=9>9</option>
+                                <option value=10>10</option>
+                                <option value=11>11</option>
+                            </select>
+                            <!--<p ng-show="vm.showValidationError('height2')" class="help-block">Enter Inches</p>-->
                         </div>
-                        <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('volume')}">
-                            <input type="text" name="volume" class="form-control " ng-model="vm.item.volume" required placeholder="Volume" />
-                            <p ng-show="vm.showValidationError('volume')" class="help-block">Please enter the volume</p>
+
+
+
+
+
+
+                        <div class="form-group col-xs-3" style="padding-right:0;" ng-class="{'has-error' : vm.showValidationError('width1')}">
+                                <label>Width</label>
+                                <select class="form-control  btn-default mySelect" name="width1" ng-model="vm.item.width1" required>
+                                    <option value="">&nbsp;</option>
+                                    <option value=12>12</option>
+                                    <option value=13>13</option>
+                                    <option value=14>14</option>
+                                    <option value=15>15</option>
+                                    <option value=16>16</option>
+                                    <option value=17>17</option>
+                                    <option value=18>18</option>
+                                    <option value=19>19</option>
+                                    <option value=20>20</option>
+                                    <option value=21>21</option>
+                                    <option value=22>22</option>
+                                    <option value=23>23</option>
+                                    <option value=24>24</option>
+                                    <option value=25>25</option>
+                                    <option value=26>26</option>
+                                    <option value=27>27</option>
+                                    <option value=28>28</option>
+                                    <option value=29>29</option>
+                                    <option value=30>30</option>
+                                    <option value=31>31</option>
+                                    <option value=32>32</option>
+                                    <option value=33>33</option>
+                                    <option value=34>34</option>
+                                    <option value=35>35</option>
+                                </select>
+                                <!--<p ng-show="vm.showValidationError('width1')" class="help-block">Please select a width</p>-->
                         </div>
+                        <div class="form-group col-xs-3"  style="padding-left:0;" ng-class="{'has-error' : vm.showValidationError('width2')}">
+                            <label>&nbsp;</label>
+                            <select class="form-control  btn-default mySelect" name="width2" ng-model="vm.item.width2" required>
+                                <option value="">&nbsp;</option>
+                                <option value=0.5>0 </option>
+                                <option value=0.5>1/2 </option>
+                                <option value=0.25>1/4 </option>
+                                <option value=0.75>3/4 </option>
+                                <option value=0.125>1/8 </option>
+                                <option value=0.375>3/8 </option>
+                                <option value=0.625>5/8 </option>
+                                <option value=0.875>7/8 </option>
+                                <option value=0.0625>1/16 </option>
+                                <option value=0.1875>3/16 </option>
+                                <option value=0.3125>5/16 </option>
+                                <option value=0.4375>7/16 </option>
+                                <option value=0.5625>9/16 </option>
+                                <option value=0.6875>11/16 </option>
+                                <option value=0.8125>13/16 </option>
+                                <option value=0.9375>15/16 </option>
+                            </select>
+                            <!--<p ng-show="vm.showValidationError('width2')" class="help-block">Please select a width</p>-->
+                        </div>
+                        
+
+
+
+                        <div class="form-group col-xs-6" style="padding-right:0;" ng-class="{'has-error' : vm.showValidationError('volume')}">
+                            <label>Volume</label>
+                            <input type="number" name="volume" class="form-control " ng-model="vm.item.volume" required placeholder="ex/ 27.5" />
+                            <!--<p ng-show="vm.showValidationError('volume1')" class="help-block">Please select a volume</p>-->
+                        </div>
+
+
+                            <!--<input type="number" name="price" class="form-control " ng-model="vm.item.price" required placeholder="ex/ 27.5" />-->
+                            <!--<p ng-show="vm.showValidationError('price')" class="help-block">Please select a price</p>-->
+
+                        <div class="form-group col-xs-6" style="padding-right:0;" ng-class="{'has-error' : vm.showValidationError('price')}">
+                            <label>Price ($USD)</label>
+                            <input type="number" name="price" class="form-control" ng-model="vm.item.price" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="itemConsumption" />
+
+                            <!--<p ng-show="vm.showValidationError('price1')" class="help-block">Please select a price</p>-->
+                        </div>
+
+
+
+
+
+
                         <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('city')}">
-                            <input type="text" name="city" class="form-control " ng-model="vm.item.city" required placeholder="City" />
-                            <p ng-show="vm.showValidationError('city')" class="help-block">Please enter the city</p>
+                            <label>City</label>
+                            <select class="form-control  btn-default mySelect" name="city" ng-model="vm.item.city" required>
+                                <option value="">&nbsp;</option>
+                                <option value="losangeles">Los Angeles</option>
+                                <option value="orangecounty">Orange County</option>
+                                <option value="sandiego">San Diego</option>
+                                <option value="sfbay">SF Bay / Santa Cruz</option>
+                            </select>
+                            <!--<p ng-show="vm.showValidationError('city')" class="help-block">Please select a city</p>-->
                         </div>
                         <div class="form-group col-xs-6" ng-class="{'has-error' : vm.showValidationError('zip')}">
-                            <input type="text" name="zip" class="form-control " ng-model="vm.item.zip" required placeholder="Zip-Code" minlength="5" maxlength="5" />
+                            <label>Zip</label>
+                            <input type="text" name="zip" class="form-control " ng-model="vm.item.zip" required placeholder="ex/ 12345" minlength="5" maxlength="5" />
                             <p ng-show="vm.showValidationError('zip')" class="help-block">Must be 5 digits</p>
-                        </div>
-                        <div class="form-group col-xs-12" ng-class="{'has-error' : vm.showValidationError('email')}">
-                            <input type="email" name="email" class="form-control " ng-model="vm.item.email" required placeholder="Email" minlength="5" maxlength="75" />
-                            <p ng-show="vm.showValidationError('email')" class="Please enter your email address"</p>
                         </div>
                     </div>
 
@@ -189,9 +343,11 @@
                     <div class="col-xs-12" style="height:25px;"></div> <!--whitespace-->
 
                     <div class="col-xs-12">
-                        <textarea class="form-control" rows="8" placeholder="Description"></textarea>
+                        <label>Description</label>
+                        <textarea class="form-control" rows="8" ng-model="vm.item.description" placeholder=""></textarea>
                     </div>
                 </div>
+
 
 
                 <!--buttons-->
@@ -227,7 +383,7 @@
                             <h3>Upload Logo</h3>
                             <div>Select a Logo file: <input type="file" id="fileInput" accept="image/x-png,image/gif,image/jpeg" /></div>
                             <div class="cropArea">
-                                <ui-cropper image="vm.startImage" area-type="rectangle" result-image="vm.item.image" result-image-size="500"></ui-cropper>
+                                <ui-cropper image="vm.startImage1" area-type="rectangle" area-min-size="200" init-max-area="true" result-image="vm.item.croppedImage1" result-image-size="500"></ui-cropper>
                             </div>  
                         </div>
                         <div class="modal-footer">
@@ -256,7 +412,7 @@
                             <h3>Upload Logo</h3>
                             <div>Select a Logo file: <input type="file" id="fileInput2" accept="image/x-png,image/gif,image/jpeg" /></div>
                             <div class="cropArea">
-                                <ui-cropper image="vm.startImage2" area-type="rectangle" result-image="vm.item.image2" result-image-size="500"></ui-cropper>
+                                <ui-cropper image="vm.startImage2" area-type="rectangle" area-min-size="200" init-max-area="true" result-image="vm.item.croppedImage2" result-image-size="500"></ui-cropper>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -289,7 +445,7 @@
                             <h3>Upload Logo</h3>
                             <div>Select a Logo file: <input type="file" id="fileInput3" accept="image/x-png,image/gif,image/jpeg" /></div>
                             <div class="cropArea">
-                                <ui-cropper image="vm.startImage3" area-type="rectangle" result-image="vm.item.image3" result-image-size="500"></ui-cropper>
+                                <ui-cropper image="vm.startImage3" area-type="rectangle" area-min-size="200" init-max-area="true" result-image="vm.item.croppedImage3" result-image-size="500"></ui-cropper>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -317,7 +473,7 @@
                             <h3>Upload Logo</h3>
                             <div>Select a Logo file: <input type="file" id="fileInput4" accept="image/x-png,image/gif,image/jpeg" /></div>
                             <div class="cropArea">
-                                <ui-cropper image="vm.startImage4" area-type="rectangle" result-image="vm.item.image4" result-image-size="500"></ui-cropper>
+                                <ui-cropper image="vm.startImage4" area-type="rectangle" area-min-size="200" init-max-area="true" result-image="vm.item.croppedImage4" result-image-size="500"></ui-cropper>
                             </div>
                         </div>
                         <div class="modal-footer">

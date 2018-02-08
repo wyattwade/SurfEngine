@@ -19,7 +19,7 @@
 
     function postService($http, $q) {
 
-        vm = this;
+        var vm = this;
 
 
         return {
@@ -153,13 +153,6 @@ function PostController(postService, $scope) {
 
     var vm = this;
 
-    vm.startImage = 'https://www.neto.com.au/assets/images/default_product.gif';
-    vm.startImage2 = 'https://www.neto.com.au/assets/images/default_product.gif';
-    vm.startImage3 = 'https://www.neto.com.au/assets/images/default_product.gif';
-    vm.startImage4 = 'https://www.neto.com.au/assets/images/default_product.gif';
-
-
-
     vm.save = _save;
     vm.edit = _edit;
     vm.delete = _delete;
@@ -171,12 +164,7 @@ function PostController(postService, $scope) {
     vm.savedId = "";
     vm.$onInit = _getUrlParams;
     vm.item = {
-        image : '',
-        image2 : '',
-        image3 : '',
-        image4 : ''
     }
-
 
 
 
@@ -187,16 +175,16 @@ function PostController(postService, $scope) {
 
         switch (imageNum) {
             case 1:
-                vm.startImage = vm.item.image;
+                vm.item.image1 = vm.item.croppedImage1;
                 break;
             case 2:
-                vm.startImage2 = vm.item.image2;
+                vm.item.image2 = vm.item.croppedImage2;
                 break;
             case 3:
-                vm.startImage3 = vm.item.image3;
+                vm.item.image3 = vm.item.croppedImage3;
                 break;
             case 4:
-                vm.startImage4 = vm.item.image4;
+                vm.item.image4 = vm.item.croppedImage4;
                 break;
         }
     }
@@ -213,7 +201,7 @@ function PostController(postService, $scope) {
             $scope.$apply(function ($scope) {
                 switch (imageNum) {
                     case 1:
-                        vm.startImage = evt.target.result;
+                        vm.startImage1 = evt.target.result;
                         break;
                     case 2:
                         vm.startImage2 = evt.target.result;
@@ -259,7 +247,40 @@ function PostController(postService, $scope) {
 
     function _getByIdSuccess(res) {
         vm.item = res;
+
+
+        if (vm.item.image1) {
+            vm.startImage1 = vm.item.image1
+        }
+        if (vm.item.image2) {
+            vm.startImage2 = vm.item.image2
+        }
+        if (vm.item.image3) {
+            vm.startImage3 = vm.item.image3
+        }
+        if (vm.item.image4) {
+            vm.startImage4 = vm.item.image4
+        }
+
+        if (vm.item.location) {
+            vm.item.city = vm.item.location
+        }
+
+        if (vm.item.height) {
+            vm.item.height1 = (Math.floor(vm.item.height / 12)).toString()
+            vm.item.height2 = (vm.item.height % 12).toString()
+        }
+
+        if (vm.item.width) {
+            vm.item.width1 = (Math.floor(vm.item.width)).toString()
+            vm.item.width2 = (vm.item.width - vm.item.width1).toString()
+        }
+        
+
     }
+
+
+
 
     function _getByIdError(err) {
         console.log(err);
@@ -271,8 +292,13 @@ function PostController(postService, $scope) {
         alert('save clicked')
 
         if (form.$valid) {
-            //   console.log(vm.item)
+            alert(vm.item)
             vm.showEdit = true; // form saved - toggle to edit
+            vm.item.height = parseInt(vm.item.height1 * 12) + parseInt(vm.item.height2)
+            vm.item.width = parseInt(vm.item.width1) + parseFloat(vm.item.width2)
+
+            alert(vm.item.width)
+
             postService.post(vm.item).then(_postSuccess, _postError);
         }
     }
@@ -286,9 +312,14 @@ function PostController(postService, $scope) {
         console.log(err);
     }
     function _edit(form) {
+        vm.submitClicked = true;
         if (form.$valid) {
+            vm.item.height = parseInt(vm.item.height1 * 12) + parseInt(vm.item.height2)
+            vm.item.width = parseInt(vm.item.width1) + parseFloat(vm.item.width2)
+
             postService.put(vm.item).then(_editSuccess, _editError);
         }
+
     }
 
     function _editSuccess(res) {
@@ -320,6 +351,7 @@ function PostController(postService, $scope) {
 
     function _showValidationError(inputProperty) {
         var result = (/*(vm.registrationForm[inputProperty].$invalid && !vm.registrationForm[inputProperty].$pristine) || */(vm.registrationForm[inputProperty].$invalid && vm.submitClicked))
+
         return result;
     }
 }
